@@ -7,9 +7,6 @@ import android.widget.FrameLayout;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,7 +15,6 @@ import com.example.testingmad.R;
 import com.example.testingmad.adminFragments.AccountFragment;
 import com.example.testingmad.adminFragments.AddFragment;
 import com.example.testingmad.adminFragments.HomeFragment;
-import com.example.testingmad.adminFragments.MsgFragment;
 import com.example.testingmad.adminFragments.NotificationFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -46,9 +42,6 @@ public class AdminHome extends AppCompatActivity {
                 if(itemId == R.id.nhome){
                     loadFragment(new HomeFragment(), false);
 
-                }else if(itemId == R.id.nmsg){
-                    loadFragment(new MsgFragment(), false);
-
                 }else if(itemId == R.id.nadd){
                     loadFragment(new AddFragment(), false);
 
@@ -60,7 +53,7 @@ public class AdminHome extends AppCompatActivity {
 
                 }
 
-                loadFragment(new HomeFragment(), true);
+//                loadFragment(new HomeFragment(), true);
 
                 return true;
             }

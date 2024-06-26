@@ -20,15 +20,11 @@
         <activity
             android:name=".adminHome.AdminHome"
             android:exported="false" />
-        <activity
-            android:name=".adminHome.MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".cusHome.CustomerHome"
             android:exported="false" />
-        <activity
-            android:name=".Forgot.Fogot"
-            android:exported="false" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />

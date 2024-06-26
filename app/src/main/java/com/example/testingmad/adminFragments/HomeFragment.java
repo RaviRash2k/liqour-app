@@ -13,13 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    ListView listView;
     String[] title = {"aaa", "bbb", "ccc", "ddd", "eee"};
     String[] price = {"10", "20", "30", "40", "50"};
     int[] img = {R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background, R.drawable.ic_launcher_background};
@@ -29,9 +30,9 @@ public class HomeFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        recyclerView = rootView.findViewById(R.id.recycleh);
+        listView = rootView.findViewById(R.id.lst);
         Adapter adapter = new Adapter(getContext(), title, img, price);
-        recyclerView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         return rootView;
     }

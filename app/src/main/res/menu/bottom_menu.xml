@@ -8,13 +8,7 @@
         android:title="Home"
         android:icon="@drawable/baseline_home_24"/>
 
-    <item
-        android:id="@+id/nmsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="Massage"
-        android:icon="@drawable/baseline_chat_24"
-        />
+
     <item
         android:id="@+id/nadd"
         android:layout_width="wrap_content"
