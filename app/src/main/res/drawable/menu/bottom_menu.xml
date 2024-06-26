@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nhome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/nmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Massage"
+        android:icon="@drawable/baseline_chat_24"
+        />
+    <item
+        android:id="@+id/nadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Add"
+        android:icon="@drawable/baseline_add_circle_24"
+        />
+
+    <item
+        android:id="@+id/nalarts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Alarts"
+        android:icon="@drawable/baseline_notifications_24"/>
+
+    <item
+        android:id="@+id/nprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Profile"
+        android:icon="@drawable/baseline_person_24"/>
+
+</menu>

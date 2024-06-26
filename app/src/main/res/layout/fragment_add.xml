@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".adminFragments.AddFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <!--Item name-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="35dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/edititemName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:hint="Enter item name" />
+    </LinearLayout>
+
+
+    <!--price-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="35dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/edititemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:hint="Enter unit price" />
+    </LinearLayout>
+
+    <!--description-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="35dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/edititemDesc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textMultiLine"
+            android:hint="Enter description"/>
+
+    </LinearLayout>
+
+    <!--quantity-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="35dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/editqty"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:hint="Enter quantity of items" />
+    </LinearLayout>
+
+
+    <!--Image-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Images"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/my_image"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_add_to_photos_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <android.widget.Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Gallary"
+                    android:textColor="@color/white"
+                    android:background="@color/black"
+                    android:layout_marginEnd="15dp"
+                    android:onClick="openGallary"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--item type-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Type"
+            android:layout_marginEnd="15dp"
+            android:textSize="20dp"/>
+
+        <CheckBox
+            android:id="@+id/checkfood"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:checked="false"
+            android:text="Foods" />
+
+        <CheckBox
+            android:id="@+id/checkliquor"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:checked="false"
+            android:text="Liquor" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/itemBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="submit"/>
+
+
+</LinearLayout>
