@@ -41,8 +41,8 @@
                 android:layout_height="match_parent"
                 android:paddingTop="50dp"
                 android:paddingBottom="20dp"
-                android:paddingHorizontal="20dp"
-                android:background="@drawable/white_bg_top_corner">
+                android:paddingHorizontal="20dp">
+<!--                android:background="@drawable/white_bg_top_corner">-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleh"
