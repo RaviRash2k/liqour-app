@@ -2,32 +2,29 @@ package com.example.testingmad.adminHome.OthersOfHome;
 
 public class MainModel {
 
-    String name, position, email, image;
+    String itemName, itemPrice, itmImage;
 
-    public MainModel(String name, String position, String email, String image) {
-        this.name = name;
-        this.position = position;
-        this.email = email;
-        this.image = image;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public MainModel() {
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
+    public void setItmImage(String itmImage) {
+        this.itmImage = itmImage;
+    }
 
     public String getName() {
-        return name;
+        return itemName;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getPrice() {
+        return itemPrice;
     }
 
     public String getImage() {
-        return image;
+        return itmImage;
     }
 }
