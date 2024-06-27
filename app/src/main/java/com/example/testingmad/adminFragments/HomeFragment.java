@@ -52,8 +52,6 @@ public class HomeFragment extends Fragment {
         myAdapter = new MainAdapter(getContext(),list);
         recyclerView.setAdapter(myAdapter);
 
-        ett = rootView.findViewById(R.id.search);
-
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
