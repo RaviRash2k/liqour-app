@@ -33,6 +33,8 @@ public class AdminHome extends AppCompatActivity {
         bNavView = findViewById(R.id.bottonNav);
         frm = findViewById(R.id.frame_layout);
 
+        loadFragment(new HomeFragment(), false);
+
         bNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -48,12 +50,12 @@ public class AdminHome extends AppCompatActivity {
                 }else if(itemId == R.id.nalarts){
                     loadFragment(new NotificationFragment(), false);
 
-                }else{
+                }else if(itemId == R.id.nprofile){
                     loadFragment(new AccountFragment(), false);
 
+                }else{
+                    loadFragment(new HomeFragment(), false);
                 }
-
-//                loadFragment(new HomeFragment(), true);
 
                 return true;
             }
