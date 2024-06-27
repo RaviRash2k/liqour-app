@@ -129,9 +129,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/my_image"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
+                android:id="@+id/img"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginVertical="20dp"
                 android:layout_marginHorizontal="20dp"
@@ -146,14 +146,14 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <android.widget.Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Gallary"
-                    android:textColor="@color/white"
-                    android:background="@color/black"
-                    android:layout_marginEnd="15dp"
-                    android:onClick="openGallary"/>
+<!--                <android.widget.Button-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:text="Gallary"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:background="@color/black"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:onClick="openGallary"/>-->
 
             </LinearLayout>
 
