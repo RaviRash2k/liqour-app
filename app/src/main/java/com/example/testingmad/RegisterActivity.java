@@ -92,6 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 DB.child("Users").child(email).child("password").setValue(pass);
                                 DB.child("Users").child(email).child("type").setValue(type);
 
+                                if(type == "admin"){
+
+                                    DB.child("Users").child(email).child("proPic").setValue("");
+                                }
+
                                 Toast.makeText(RegisterActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                                 finish();
                             }

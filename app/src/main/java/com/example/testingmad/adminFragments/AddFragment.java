@@ -111,7 +111,7 @@ public class AddFragment extends Fragment {
                     type = "invalid";
                 }
 
-                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || qty.isEmpty() || type == "invalid"){
+                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || qty.isEmpty() || uri == null || type == "invalid"){
 
                     Toast.makeText(getContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
                 }else{
