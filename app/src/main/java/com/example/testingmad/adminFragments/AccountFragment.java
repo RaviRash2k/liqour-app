@@ -28,8 +28,10 @@ import android.widget.Toast;
 
 import com.example.testingmad.MainActivity;
 import com.example.testingmad.R;
+import com.example.testingmad.adminHome.AdminHome;
 import com.example.testingmad.adminHome.OthersOfHome.MainAdapter;
 import com.example.testingmad.adminHome.OthersOfHome.MainModel;
+import com.example.testingmad.cusHome.CustomerHome;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -46,7 +48,7 @@ import java.util.ArrayList;
 public class AccountFragment extends Fragment {
 
     RecyclerView recyclerView;
-    TextView name, editPro, ok, cansel;
+    TextView name, editPro, ok, cansel, ook, ccansel;
     DatabaseReference database, databaseTwo;
     StorageReference storageReference;
     MainAdapter myAdapter;
@@ -55,7 +57,8 @@ public class AccountFragment extends Fragment {
     SharedPreferences.Editor editor;
     int PICK_IMAGE_REQUEST;
     Uri uri;
-    ImageView proPic;
+    ImageView proPic, edit;
+    EditText proNameEdit;
 
     Button logout;
 
@@ -66,7 +69,10 @@ public class AccountFragment extends Fragment {
 
         name = rootView.findViewById(R.id.proName);
 
+        proNameEdit = rootView.findViewById(R.id.proNameEdit);
+
         editPro = rootView.findViewById(R.id.editPro);
+        edit = rootView.findViewById(R.id.edit);
 
         recyclerView = rootView.findViewById(R.id.rview2);
         database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/").child("Items");
@@ -88,6 +94,68 @@ public class AccountFragment extends Fragment {
 
         ok = rootView.findViewById(R.id.ok);
         cansel = rootView.findViewById(R.id.cansel);
+
+        ook = rootView.findViewById(R.id.ook);
+        ccansel = rootView.findViewById(R.id.ccansel);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                name.setVisibility(View.GONE);
+                proNameEdit.setVisibility(View.VISIBLE);
+                ook.setVisibility(View.VISIBLE);
+                ccansel.setVisibility(View.VISIBLE);
+                edit.setVisibility(View.GONE);
+            }
+        });
+
+        ook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                databaseTwo.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        String newName = proNameEdit.getText().toString();
+
+                        if(newName.isEmpty()){
+
+                            name.setVisibility(View.VISIBLE);
+                            proNameEdit.setVisibility(View.GONE);
+                            ook.setVisibility(View.GONE);
+                            ccansel.setVisibility(View.GONE);
+                            edit.setVisibility(View.VISIBLE);
+
+                        }else{
+                            databaseTwo.child(sharedPreferences.getString("userEmail", "")).child("userName").setValue(newName);
+                            name.setVisibility(View.VISIBLE);
+                            proNameEdit.setVisibility(View.GONE);
+                            ook.setVisibility(View.GONE);
+                            ccansel.setVisibility(View.GONE);
+                            edit.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        ccansel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name.setVisibility(View.VISIBLE);
+                edit.setVisibility(View.VISIBLE);
+                proNameEdit.setVisibility(View.GONE);
+                ook.setVisibility(View.GONE);
+                ccansel.setVisibility(View.GONE);
+            }
+        });
 
         editPro.setOnClickListener(new View.OnClickListener() {
             @Nullable
