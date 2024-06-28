@@ -55,6 +55,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         // Set item price
         holder.itemPrice.setText(model.getPrice());
+
+        //Set Available qty
+        holder.itemQty.setText(model.getItemQty());
     }
 
     @Override
@@ -64,14 +67,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemPrice;
+        TextView itemName, itemPrice, itemQty;
         ImageView itemImage;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
+
             itemName = itemView.findViewById(R.id.forName);
             itemPrice = itemView.findViewById(R.id.forPrice);
             itemImage = itemView.findViewById(R.id.forimg);
+            itemQty = itemView.findViewById(R.id.forQty);
         }
     }
 

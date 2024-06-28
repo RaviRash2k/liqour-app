@@ -136,7 +136,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/home_backg"
                 android:paddingHorizontal="10dp">
-<!--                android:background="@drawable/white_bg_top_corner">-->
+                <!--                android:background="@drawable/white_bg_top_corner">-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rview1"

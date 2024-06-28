@@ -1,23 +1,32 @@
 package com.example.testingmad.cusHome;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.testingmad.MainActivity;
 import com.example.testingmad.R;
+import com.example.testingmad.adminFragments.AccountFragment;
+import com.example.testingmad.adminFragments.AddFragment;
+import com.example.testingmad.adminFragments.HomeFragment;
+import com.example.testingmad.adminFragments.NotificationFragment;
+import com.example.testingmad.cusFragments.Cus_CartFragment;
+import com.example.testingmad.cusFragments.Cus_Fragment;
+import com.example.testingmad.cusFragments.Cus_HomeFragment;
+import com.example.testingmad.cusFragments.Cus_OrderFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CustomerHome extends AppCompatActivity {
 
-    Button logout;
+    private BottomNavigationView bNavView;
+    private FrameLayout frm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +34,51 @@ public class CustomerHome extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cus_home);
 
-        logout = findViewById(R.id.cuslogout);
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        bNavView = findViewById(R.id.bottonNav);
+        frm = findViewById(R.id.frame_layout);
+
+        loadFragment(new Cus_HomeFragment(), false);
+
+        bNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                SharedPreferences sharedPreference = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreference.edit();
-                editor.clear();
-                editor.apply();
+                int itemId = item.getItemId();
 
-                Intent i = new Intent(CustomerHome.this, MainActivity.class);
-                startActivity(i);
+                if(itemId == R.id.nhome){
+                    loadFragment(new Cus_HomeFragment(), false);
+
+                }else if(itemId == R.id.nadd){
+                    loadFragment(new Cus_Fragment(), false);
+
+                }else if(itemId == R.id.nalarts){
+                    loadFragment(new Cus_CartFragment(), false);
+
+                }else if(itemId == R.id.nprofile){
+                    loadFragment(new Cus_OrderFragment(), false);
+
+                }else{
+                    loadFragment(new Cus_HomeFragment(), false);
+                }
+
+                return true;
             }
         });
+    }
 
+    private void loadFragment(Fragment fragment, boolean isAppInsialized){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if(isAppInsialized){
+            fragmentTransaction.add(R.id.frame_layout, fragment);
+
+        }else{
+
+            fragmentTransaction.replace(R.id.frame_layout, fragment);
+        }
+
+        fragmentTransaction.commit();
     }
 }

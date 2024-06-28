@@ -1,8 +1,8 @@
-package com.example.testingmad.adminHome.OthersOfHome;
+package com.example.testingmad.cusHome.OthersOfHome;
 
 public class MainModel {
 
-    String itemName, itemPrice, itmImage, itemQty;
+    String itemName, itemPrice, itmImage;
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
@@ -16,13 +16,6 @@ public class MainModel {
         this.itmImage = itmImage;
     }
 
-    public void setItemQty(String itemQty) {
-        this.itemQty = itemQty;
-    }
-
-    public String getItemQty() {
-        return itemQty;
-    }
     public String getName() {
         return itemName;
     }

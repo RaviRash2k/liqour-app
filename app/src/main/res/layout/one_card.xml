@@ -37,7 +37,7 @@
                 android:textSize="19dp"
                 android:paddingHorizontal="20dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="4dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -50,14 +50,37 @@
                     android:text="LKR : "
                     android:textStyle="italic"
                     android:paddingStart="25dp"
-                    android:textSize="15dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:textSize="15dp"/>
 
                 <TextView
                     android:id="@+id/forPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
+                    android:paddingHorizontal="7dp"
+                    android:textSize="18dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="available qty : "
+                    android:textStyle="italic"
+                    android:paddingStart="25dp"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/forQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Qty"
                     android:paddingHorizontal="7dp"
                     android:textSize="18dp"
                     android:layout_marginBottom="8dp"/>
