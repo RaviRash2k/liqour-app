@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(this, RegisterActivity.class);
 
-        DatabaseReference DB = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/");
+        DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
 
         pref = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         editor = pref.edit();
@@ -73,23 +73,21 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String emailtxt = email.getText().toString().trim();
+                String passtxt = pass.getText().toString().trim();
 
-                String emailtxt = email.getText().toString();
-                String passtxt = pass.getText().toString();
+                if (emailtxt.isEmpty() || passtxt.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+                } else {
+                    DatabaseReference usersRef = DB.child("Users");
 
-                if(emailtxt.isEmpty() || passtxt.isEmpty()){
-                    Toast.makeText(MainActivity.this, "Please Enter Mobile or password", Toast.LENGTH_SHORT).show();
-                }else{
-                    DB.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            if(snapshot.hasChild(emailtxt)){
-
+                            if (snapshot.hasChild(emailtxt)) {
                                 String getPass = snapshot.child(emailtxt).child("password").getValue(String.class);
 
-                                if(getPass.equals(passtxt)){
-
+                                if (getPass != null && getPass.equals(passtxt)) {
                                     String gettype = snapshot.child(emailtxt).child("type").getValue(String.class);
 
                                     editor.putString("userEmail", emailtxt);
@@ -97,27 +95,28 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putBoolean("logged", true);
                                     editor.apply();
 
-                                    if(gettype.equals("customer")){
-
-                                        Toast.makeText(MainActivity.this, "Successfully loged to Customer account", Toast.LENGTH_SHORT).show();
+                                    if ("customer".equals(gettype)) {
+                                        Toast.makeText(MainActivity.this, "Successfully logged into Customer account", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, CustomerHome.class));
                                         finish();
-                                    }else{
-
-                                        Toast.makeText(MainActivity.this, "Successfully loged to Admin account", Toast.LENGTH_SHORT).show();
+                                    } else if ("admin".equals(gettype)) {
+                                        Toast.makeText(MainActivity.this, "Successfully logged into Admin account", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, AdminHome.class));
                                         finish();
+                                    } else {
+                                        Toast.makeText(MainActivity.this, "Unknown user type", Toast.LENGTH_SHORT).show();
                                     }
-
-                                }else{
+                                } else {
                                     Toast.makeText(MainActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
                                 }
+                            } else {
+                                Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
+                            Toast.makeText(MainActivity.this, "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

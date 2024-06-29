@@ -1,8 +1,8 @@
-package com.example.testingmad.cusHome.OthersOfHome;
+package com.example.testingmad.cusHome.OthersOfHomeCus;
 
-public class MainModel {
+public class MainModel2 {
 
-    String itemName, itemPrice, itmImage;
+    String itemName, itemPrice, itmImage, itemQty;
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
@@ -16,6 +16,10 @@ public class MainModel {
         this.itmImage = itmImage;
     }
 
+    public void setItemQty(String itemQty) {
+        this.itemQty = itemQty;
+    }
+
     public String getName() {
         return itemName;
     }
@@ -26,5 +30,9 @@ public class MainModel {
 
     public String getImage() {
         return itmImage;
+    }
+
+    public String getItemQty() {
+        return itemQty;
     }
 }

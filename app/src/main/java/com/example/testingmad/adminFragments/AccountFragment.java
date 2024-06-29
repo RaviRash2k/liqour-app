@@ -75,8 +75,8 @@ public class AccountFragment extends Fragment {
         edit = rootView.findViewById(R.id.edit);
 
         recyclerView = rootView.findViewById(R.id.rview2);
-        database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/").child("Items");
-        databaseTwo = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/").child("Users");
+        database = FirebaseDatabase.getInstance().getReference().child("Items");
+        databaseTwo = FirebaseDatabase.getInstance().getReference().child("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -41,7 +41,7 @@ public class Forgot extends AppCompatActivity {
 
         btn = findViewById(R.id.submit);
 
-        DatabaseReference DB = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/");
+        DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
 
 
         btn.setOnClickListener(new View.OnClickListener() {

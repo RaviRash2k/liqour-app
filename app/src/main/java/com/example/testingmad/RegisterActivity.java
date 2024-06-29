@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         rpass = findViewById(R.id.rpass);
         reepass = findViewById(R.id.repass);
 
-        DB = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/");
+        DB = FirebaseDatabase.getInstance().getReference();
 
 
         //Register

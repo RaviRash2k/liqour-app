@@ -13,13 +13,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/forimg"
             android:layout_weight="2"
-            android:layout_width="110dp"
-            android:layout_height="115dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"/>
@@ -39,7 +39,7 @@
                 android:textStyle="bold"
                 android:textSize="19dp"
                 android:paddingHorizontal="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"/>
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
-                    android:paddingHorizontal="7dp"
+                    android:paddingHorizontal="4dp"
                     android:textSize="18dp"/>
 
             </LinearLayout>
@@ -84,65 +84,72 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
-                    android:paddingHorizontal="7dp"
+                    android:paddingHorizontal="4dp"
                     android:textSize="18dp"
                     android:layout_marginBottom="8dp"/>
 
             </LinearLayout>
 
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_gravity="center_horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="-"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="28dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="1"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="20dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="+"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="20dp"/>-->
+
+<!--            </LinearLayout>-->
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal">
 
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="28dp"/>
+                <Button
+                    android:id="@+id/addCart"
+                    android:layout_width="75dp"
+                    android:layout_height="40dp"
+                    android:text="cart"
+                    android:textSize="12dp"
+                    android:layout_marginEnd="13dp"/>
 
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20dp"/>
-
-                <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="20dp"/>
+                <Button
+                    android:id="@+id/order"
+                    android:layout_width="75dp"
+                    android:layout_height="40dp"
+                    android:textSize="12dp"
+                    android:text="order"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2"
-            android:layout_marginHorizontal="6dp"
-            android:layout_gravity="center_vertical">
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="cart"/>
-
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="order"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

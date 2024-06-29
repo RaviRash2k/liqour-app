@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "580159245948",
-    "project_id": "testingmad-82201",
-    "storage_bucket": "testingmad-82201.appspot.com"
+    "project_number": "346143713197",
+    "project_id": "testingmad3",
+    "storage_bucket": "testingmad3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:580159245948:android:e7da0f57b244c2142a43f9",
+        "mobilesdk_app_id": "1:346143713197:android:b556410edfc84c8350a324",
         "android_client_info": {
           "package_name": "com.example.testingmad"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDaNm9dUqb6d3Igo-NEdk3irZla9BUeIoI"
+          "current_key": "AIzaSyAFHqlLlx7_xaj5qOWfn46Jr1KgP0O-gtg"
         }
       ],
       "services": {

@@ -46,16 +46,16 @@ public class CustomerHome extends AppCompatActivity {
 
                 int itemId = item.getItemId();
 
-                if(itemId == R.id.nhome){
+                if(itemId == R.id.nchome){
                     loadFragment(new Cus_HomeFragment(), false);
 
-                }else if(itemId == R.id.nadd){
+                }else if(itemId == R.id.ncadd){
                     loadFragment(new Cus_Fragment(), false);
 
-                }else if(itemId == R.id.nalarts){
+                }else if(itemId == R.id.ncart){
                     loadFragment(new Cus_CartFragment(), false);
 
-                }else if(itemId == R.id.nprofile){
+                }else if(itemId == R.id.norders){
                     loadFragment(new Cus_OrderFragment(), false);
 
                 }else{

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nhome"
+        android:id="@+id/nchome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="Home"
@@ -10,10 +10,10 @@
 
 
     <item
-        android:id="@+id/nadd"
+        android:id="@+id/ncadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Add"
+        android:title="Customer"
         android:icon="@drawable/baseline_add_circle_24"
         />
 
@@ -21,14 +21,14 @@
         android:id="@+id/ncart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Alarts"
-        android:icon="@drawable/baseline_notifications_24"/>
+        android:title="Cart"
+        android:icon="@drawable/baseline_add_shopping_cart_24"/>
 
     <item
         android:id="@+id/norders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Profile"
-        android:icon="@drawable/baseline_person_24"/>
+        android:title="Orders"
+        android:icon="@drawable/baseline_local_shipping_24"/>
 
 </menu>

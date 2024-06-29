@@ -65,7 +65,7 @@ public class AddFragment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        DB = FirebaseDatabase.getInstance().getReferenceFromUrl("https://testingmad-82201-default-rtdb.firebaseio.com/").child("Items");
+        DB = FirebaseDatabase.getInstance().getReference().child("Items");
         String key = DB.child("Items").push().getKey();
 
         k = key;
@@ -195,8 +195,7 @@ public class AddFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==PICK_IMAGE_REQUEST && resultCode==Activity.RESULT_OK && data !=null){
-
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             uri = data.getData();
             img.setImageURI(uri);
         }
