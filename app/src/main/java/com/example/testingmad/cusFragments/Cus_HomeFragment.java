@@ -35,13 +35,10 @@ public class Cus_HomeFragment extends Fragment {
     MainAdapterCus myAdapter;
     ArrayList<MainModel2> list;
     TextView foodSelect, liqorSelect, x, y;
-    String liqOfood, k;
-
-    Button addCart, order;
+    String liqOfood = "food";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_cus__home, container, false);
 
 
@@ -51,7 +48,7 @@ public class Cus_HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         list = new ArrayList<>();
-        myAdapter = new MainAdapterCus(getContext(),list);
+        myAdapter = new MainAdapterCus(getContext(), list);
         recyclerView.setAdapter(myAdapter);
 
         foodSelect = rootView.findViewById(R.id.foodSelect);
@@ -59,44 +56,21 @@ public class Cus_HomeFragment extends Fragment {
         x = rootView.findViewById(R.id.x);
         y = rootView.findViewById(R.id.y);
 
-        addCart = rootView.findViewById(R.id.addCart);
-        order = rootView.findViewById(R.id.order);
+        // Set initial visibility
+        foodSelect.setVisibility(View.VISIBLE);
+        liqorSelect.setVisibility(View.GONE);
 
-        liqOfood = "food";
+        // Initial fetch based on default liqOfood value
+        fetchDataFromDatabase();
 
-        addCart.setOnClickListener(new View.OnClickListener() {
+        // Toggle between food and liquor selection
+        x.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
-
-//                DB.child("Cart").addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("CurrentUser", getContext().MODE_PRIVATE);
-//                        String customer = sharedPreferences.getString("userEmail", "");
-//
-//
-//                            DB.child("Cart").child(k).child("customer").setValue(customer);
-//                            DB.child("Cart").child(k).child("mobile").setValue(mobile);
-//                            DB.child("Cart").child(k).child("password").setValue(pass);
-//                            DB.child("Cart").child(k).child("type").setValue(type);
-//
-//                            if(type == "admin"){
-//
-//                                DB.child("Users").child(email).child("proPic").setValue("");
-//                            }
-//
-//                            Toast.makeText(RegisterActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
-//                            finish();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
+                liqOfood = "food";
+                foodSelect.setVisibility(View.VISIBLE);
+                liqorSelect.setVisibility(View.GONE);
+                fetchDataFromDatabase();
             }
         });
 
@@ -106,195 +80,54 @@ public class Cus_HomeFragment extends Fragment {
                 liqOfood = "liquor";
                 foodSelect.setVisibility(View.GONE);
                 liqorSelect.setVisibility(View.VISIBLE);
-                System.out.println(liqOfood);
-
-                database.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        list.clear();
-
-                        for(DataSnapshot itemSnapshot : snapshot.getChildren()) {
-
-                            String itemType = itemSnapshot.child("itemType").getValue(String.class);
-
-                            if(liqOfood.equals("food") && itemType.equals("food")){
-                                System.out.println("hello");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel2 mainModel2 = new MainModel2();
-
-                                mainModel2.setItemName(on1);
-                                mainModel2.setItemPrice(on2);
-                                mainModel2.setItmImage(on3);
-                                mainModel2.setItemQty(on4);
-
-                                list.add(mainModel2);
-
-                            }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                                System.out.println("Drinks");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel2 mainModel2 = new MainModel2();
-
-                                mainModel2.setItemName(on1);
-                                mainModel2.setItemPrice(on2);
-                                mainModel2.setItmImage(on3);
-                                mainModel2.setItemQty(on4);
-
-                                list.add(mainModel2);
-                            }
-
-                            System.out.println("Test 1");
-                        }
-                        myAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                        System.out.println("error");
-                    }
-                });
+                fetchDataFromDatabase();
             }
         });
 
-        x.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                liqOfood = "food";
-                foodSelect.setVisibility(View.VISIBLE);
-                liqorSelect.setVisibility(View.GONE);
-                System.out.println(liqOfood);
+        return rootView;
+    }
 
-                database.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        list.clear();
-
-                        for(DataSnapshot itemSnapshot : snapshot.getChildren()) {
-
-                            String itemType = itemSnapshot.child("itemType").getValue(String.class);
-
-                            if(liqOfood.equals("food") && itemType.equals("food")){
-                                System.out.println("hello");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel2 mainModel = new MainModel2();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItmImage(on4);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-
-                            }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                                System.out.println("Drinks");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel2 mainModel = new MainModel2();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-                            }
-
-                            System.out.println("Test 1");
-                        }
-                        myAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                        System.out.println("error");
-                    }
-                });
-            }
-        });
-
+    // Fetch data from Firebase based on liqOfood
+    private void fetchDataFromDatabase() {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 list.clear();
 
-                for(DataSnapshot itemSnapshot : snapshot.getChildren()) {
-
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemType = itemSnapshot.child("itemType").getValue(String.class);
 
-                    if(liqOfood.equals("food") && itemType.equals("food")){
-                        System.out.println("hello");
+                    if ((liqOfood.equals("food") && itemType.equals("food")) ||
+                            (liqOfood.equals("liquor") && itemType.equals("liquor"))) {
 
                         String on1 = itemSnapshot.child("itemName").getValue(String.class);
                         String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
                         String on3 = itemSnapshot.child("itemImage").getValue(String.class);
                         String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
+                        String seller = itemSnapshot.child("User").getValue(String.class);
+                        String itemCode = itemSnapshot.getKey();
+
+                        System.out.println(seller);
+                        System.out.println(itemCode);
 
                         MainModel2 mainModel = new MainModel2();
-
                         mainModel.setItemName(on1);
                         mainModel.setItemPrice(on2);
                         mainModel.setItmImage(on3);
                         mainModel.setItemQty(on4);
-
-                        list.add(mainModel);
-
-                    }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                        System.out.println("Drinks");
-
-                        String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                        String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                        String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                        MainModel2 mainModel = new MainModel2();
-
-                        mainModel.setItemName(on1);
-                        mainModel.setItemPrice(on2);
-                        mainModel.setItmImage(on3);
-                        mainModel.setItemQty(on4);
+                        mainModel.setSeller(seller);
+                        mainModel.setItemCode(itemCode);
 
                         list.add(mainModel);
                     }
-
-                    System.out.println("Test 1");
                 }
                 myAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-                System.out.println("error");
+                // Handle onCancelled
             }
         });
-
-        return rootView;
     }
 }

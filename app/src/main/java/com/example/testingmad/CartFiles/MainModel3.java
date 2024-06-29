@@ -1,8 +1,8 @@
-package com.example.testingmad.cusHome.OthersOfHomeCus;
+package com.example.testingmad.CartFiles;
 
-public class MainModel2 {
+public class MainModel3 {
 
-    String itemName, itemPrice, itmImage, itemQty, seller, itemCode;
+    String itemName, itemPrice, itmImage, itemQty;
 
     //Setters
     public void setItemName(String itemName) {
@@ -21,13 +21,6 @@ public class MainModel2 {
         this.itemQty = itemQty;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
 
     //Getters
     public String getName() {
@@ -44,13 +37,5 @@ public class MainModel2 {
 
     public String getItemQty() {
         return itemQty;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public String getItemCode() {
-        return itemCode;
     }
 }
