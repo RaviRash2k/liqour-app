@@ -20,6 +20,8 @@
         android:id="@+id/bottonNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#090909"
+        app:itemTextColor="#FFCBCBCB"
         app:menu="@menu/bottom_menu_cus"/>
 
 

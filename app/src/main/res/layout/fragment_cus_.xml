@@ -14,7 +14,7 @@
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:gravity="center"
-            android:backgroundTint="#CFCFCF"
+            android:backgroundTint="#B2B2B2"
             android:background="@drawable/home_backg"
             android:orientation="vertical">
 
@@ -22,8 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="15dp"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:text="Do you want to logout?" />
 
             <LinearLayout
@@ -37,7 +38,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="50dp"
+                    android:textStyle="bold"
                     android:text="NO" />
 
                 <TextView
@@ -45,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:text="Yes" />
 
             </LinearLayout>
