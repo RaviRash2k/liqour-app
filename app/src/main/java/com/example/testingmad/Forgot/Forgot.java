@@ -41,7 +41,7 @@ public class Forgot extends AppCompatActivity {
 
         btn = findViewById(R.id.submit);
 
-        DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -62,27 +62,23 @@ public class Forgot extends AppCompatActivity {
                         Toast.makeText(Forgot.this,"Passwords not matching",Toast.LENGTH_SHORT).show();
 
                     }else{
+                        DB.orderByChild("userEmail").equalTo(getEmail).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                        DB.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                if(snapshot.hasChild(getEmail)){
+                                if (dataSnapshot.exists()) {
 
-                                    HashMap<String, Object> updates = new HashMap<>();
-                                    updates.put("password",getPass);
+                                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                        String userId = userSnapshot.getKey();
 
-                                    DB.child("Users").child(getEmail).updateChildren(updates);
+                                        DB.child(userId).child("password").setValue(getPass);
 
-                                    Toast.makeText(Forgot.this,"Email is here",Toast.LENGTH_SHORT).show();
-
-                                    btn = findViewById(R.id.submit);
-                                    btn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            startActivity(new Intent(Forgot.this, MainActivity.class));
-                                        }
-                                    });
+                                        Toast.makeText(Forgot.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(Forgot.this, MainActivity.class));
+                                        finish();
+                                        return;
+                                    }
 
                                 }else{
                                     Toast.makeText(Forgot.this,"Email doesn't exit",Toast.LENGTH_SHORT).show();
@@ -95,11 +91,7 @@ public class Forgot extends AppCompatActivity {
                             }
                         });
                     }
-
-
                 }
-
-
             }
         });
     }

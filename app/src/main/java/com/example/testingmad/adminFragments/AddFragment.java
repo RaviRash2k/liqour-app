@@ -38,7 +38,6 @@ import com.google.firebase.storage.UploadTask;
 public class AddFragment extends Fragment {
 
     EditText itemName, itemPrice, itemDesc, itemQty;
-
     Button btn;
     ImageView img;
     String type, user, k;
@@ -146,6 +145,8 @@ public class AddFragment extends Fragment {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
+
+                            System.out.println("item not inserted");
 
                         }
                     });

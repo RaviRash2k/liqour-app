@@ -3,6 +3,7 @@ package com.example.testingmad;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(this, RegisterActivity.class);
 
-        DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Users");
 
         pref = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         editor = pref.edit();
@@ -73,50 +74,63 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("Click", "Click");
+
                 String emailtxt = email.getText().toString().trim();
                 String passtxt = pass.getText().toString().trim();
 
                 if (emailtxt.isEmpty() || passtxt.isEmpty()) {
+
                     Toast.makeText(MainActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    DatabaseReference usersRef = DB.child("Users");
 
-                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    DB.orderByChild("userEmail").equalTo(emailtxt).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.hasChild(emailtxt)) {
-                                String getPass = snapshot.child(emailtxt).child("password").getValue(String.class);
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
 
-                                if (getPass != null && getPass.equals(passtxt)) {
-                                    String gettype = snapshot.child(emailtxt).child("type").getValue(String.class);
+                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
 
-                                    editor.putString("userEmail", emailtxt);
-                                    editor.putString("type", gettype);
-                                    editor.putBoolean("logged", true);
-                                    editor.apply();
+                                    String userId = userSnapshot.getKey();
+                                    String getPass = userSnapshot.child("password").getValue(String.class);
+                                    String gettype = userSnapshot.child("type").getValue(String.class);
 
-                                    if ("customer".equals(gettype)) {
-                                        Toast.makeText(MainActivity.this, "Successfully logged into Customer account", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(MainActivity.this, CustomerHome.class));
-                                        finish();
-                                    } else if ("admin".equals(gettype)) {
-                                        Toast.makeText(MainActivity.this, "Successfully logged into Admin account", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(MainActivity.this, AdminHome.class));
-                                        finish();
-                                    } else {
-                                        Toast.makeText(MainActivity.this, "Unknown user type", Toast.LENGTH_SHORT).show();
+                                    if (passtxt != null && passtxt.equals(getPass)) {
+
+                                        editor.putString("userEmail", userId);
+                                        editor.putString("type", gettype);
+                                        editor.putBoolean("logged", true);
+                                        editor.apply();
+
+                                        if ("customer".equals(gettype)) {
+                                            Toast.makeText(MainActivity.this, "Successfully logged into Customer account", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(MainActivity.this, CustomerHome.class));
+                                            finish();
+
+                                        } else if ("admin".equals(gettype)) {
+                                            Toast.makeText(MainActivity.this, "Successfully logged into Admin account", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(MainActivity.this, AdminHome.class));
+                                            finish();
+
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "Unknown user type", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                } else {
-                                    Toast.makeText(MainActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
                                 }
+
+                                Toast.makeText(MainActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+
                             } else {
-                                Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(MainActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                             }
                         }
-
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(MainActivity.this, "Database Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            Toast.makeText(MainActivity.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

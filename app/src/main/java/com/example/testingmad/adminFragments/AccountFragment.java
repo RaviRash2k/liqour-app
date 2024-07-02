@@ -281,7 +281,7 @@ public class AccountFragment extends Fragment {
 
                         databaseTwo.child(sharedPreferences.getString("userEmail", "")).child("proPic").setValue(uri.toString());
 
-                        Toast.makeText(getContext(), "Prodile picture added successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Profile picture added successfully",Toast.LENGTH_SHORT).show();
 
                     }
                 });

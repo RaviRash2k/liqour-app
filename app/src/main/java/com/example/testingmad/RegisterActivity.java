@@ -45,8 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
         rpass = findViewById(R.id.rpass);
         reepass = findViewById(R.id.repass);
 
-        DB = FirebaseDatabase.getInstance().getReference();
+        DB = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        String key = DB.push().getKey();
 
         //Register
         btn = findViewById(R.id.reg);
@@ -80,22 +81,19 @@ public class RegisterActivity extends AppCompatActivity {
 
                 else{
 
-                    DB.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    DB.orderByChild("userEmail").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.hasChild(email)){
-                                Toast.makeText(RegisterActivity.this, "Already have an account", Toast.LENGTH_SHORT).show();
-                            }else{
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
 
-                                DB.child("Users").child(email).child("userName").setValue(name);
-                                DB.child("Users").child(email).child("mobile").setValue(mobile);
-                                DB.child("Users").child(email).child("password").setValue(pass);
-                                DB.child("Users").child(email).child("type").setValue(type);
+                                Toast.makeText(getApplicationContext(), "Email already exists!", Toast.LENGTH_SHORT).show();
 
-                                if(type == "admin"){
-
-                                    DB.child("Users").child(email).child("proPic").setValue("");
-                                }
+                            } else {
+                                DB.child(key).child("userEmail").setValue(email);
+                                DB.child(key).child("userName").setValue(name);
+                                DB.child(key).child("mobile").setValue(mobile);
+                                DB.child(key).child("password").setValue(pass);
+                                DB.child(key).child("type").setValue(type);
 
                                 Toast.makeText(RegisterActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -103,10 +101,10 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
+
                 }
             }
         });
