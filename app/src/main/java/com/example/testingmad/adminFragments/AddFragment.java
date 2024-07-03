@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,12 +41,19 @@ public class AddFragment extends Fragment {
     EditText itemName, itemPrice, itemDesc, itemQty;
     Button btn;
     ImageView img;
-    String type, user, k;
+    String type, user, key;
     CheckBox food, liquor;
     DatabaseReference DB;
     StorageReference storageReference;
     Uri uri;
     int PICK_IMAGE_REQUEST;
+
+
+    String name;
+    String price;
+    String desc;
+    String qty;
+
 
     @Nullable
     @Override
@@ -61,13 +69,15 @@ public class AddFragment extends Fragment {
 
         SharedPreferences sharedPreference = requireActivity().getSharedPreferences("CurrentUser", getContext().MODE_PRIVATE);
         user = sharedPreference.getString("userEmail","");
+        if (user == null || user.isEmpty()) {
+
+            Toast.makeText(getContext(), "User email is missing", Toast.LENGTH_SHORT).show();
+        }
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
         DB = FirebaseDatabase.getInstance().getReference().child("Items");
-        String key = DB.child("Items").push().getKey();
-
-        k = key;
+        key = DB.child("Items").push().getKey();
 
         PICK_IMAGE_REQUEST = 2;
 
@@ -91,10 +101,10 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String name = itemName.getText().toString();
-                String price = itemPrice.getText().toString();
-                String desc = itemDesc.getText().toString();
-                String qty = itemQty.getText().toString();
+                name = itemName.getText().toString();
+                price = itemPrice.getText().toString();
+                desc = itemDesc.getText().toString();
+                qty = itemQty.getText().toString();
 
                 //check food or liquor
                 food = rootView.findViewById(R.id.checkfood);
@@ -110,46 +120,45 @@ public class AddFragment extends Fragment {
                     type = "invalid";
                 }
 
-                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || qty.isEmpty() || uri == null || type == "invalid"){
+                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || qty.isEmpty() || type.equals("invalid")){
 
                     Toast.makeText(getContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    if(uri != null){
-                        uploadImageToFireBase(uri);
-                        Toast.makeText(getContext(), "img uploaded",Toast.LENGTH_SHORT).show();
+                    if (uri != null) {
+                        StorageReference file = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+                        file.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
 
-                    }else{
-                        Toast.makeText(getContext(), "no image here",Toast.LENGTH_SHORT).show();
-                    }
+                                        String imageUrl = uri.toString();
+                                        DB.child(key).child("itemImage").setValue(imageUrl);
+                                        DB.child(key).child("itemName").setValue(name);
+                                        DB.child(key).child("itemPrice").setValue(price);
+                                        DB.child(key).child("itemDescription").setValue(desc);
+                                        DB.child(key).child("itemQuantity").setValue(qty);
+                                        DB.child(key).child("itemType").setValue(type);
+                                        DB.child(key).child("User").setValue(user);
 
-                    DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Intent i = new Intent(getActivity(), AdminHome.class);
+                                        startActivity(i);
 
-                            if(snapshot.hasChild(key)){
-                                Toast.makeText(getContext(), "Already have an item", Toast.LENGTH_SHORT).show();
-                            }else {
-
-                                DB.child(key).child("itemName").setValue(name);
-                                DB.child(key).child("itemPrice").setValue(price);
-                                DB.child(key).child("itemDescription").setValue(desc);
-                                DB.child(key).child("itemQuantity").setValue(qty);
-                                DB.child(key).child("itemType").setValue(type);
-                                DB.child(key).child("User").setValue(user);
-
-                                Intent i = new Intent(getActivity(), AdminHome.class);
-                                startActivity(i);
+                                        Toast.makeText(getContext(), "Successfully added", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                            System.out.println("item not inserted");
-
-                        }
-                    });
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+//                                Log.e(TAG, "Error uploading image", e);
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -157,36 +166,11 @@ public class AddFragment extends Fragment {
         return rootView;
     }
 
-    private void uploadImageToFireBase(Uri uri) {
-
-        StorageReference file = storageReference.child(System.currentTimeMillis()+ "." +getFileExtension(uri));
-        file.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        DB.child(k).child("itemImage").setValue(uri.toString());
-
-                        Toast.makeText(getContext(), "Successfully added",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(getContext(), "Failled",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-
     private String getFileExtension(Uri uri) {
+
+        if (uri == null) {
+            return null;
+        }
         ContentResolver contentResolver = requireActivity().getContentResolver();
         MimeTypeMap map = MimeTypeMap.getSingleton();
         return map.getExtensionFromMimeType(contentResolver.getType(uri));
@@ -198,7 +182,13 @@ public class AddFragment extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             uri = data.getData();
-            img.setImageURI(uri);
+
+            if (uri != null) {
+                img.setImageURI(uri);
+
+            } else {
+                Toast.makeText(getContext(), "Error: Image not selected", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

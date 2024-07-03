@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     DatabaseReference database;
     MainAdapter myAdapter;
     ArrayList<MainModel> list;
-    TextView foodSelect, liqorSelect, x, y;
+    TextView foodSelect, liqorSelect, food, liquor;
     String liqOfood;
 
 
@@ -55,148 +55,42 @@ public class HomeFragment extends Fragment {
 
         foodSelect = rootView.findViewById(R.id.foodSelect);
         liqorSelect = rootView.findViewById(R.id.liqorSelect);
-        x = rootView.findViewById(R.id.x);
-        y = rootView.findViewById(R.id.y);
+        food = rootView.findViewById(R.id.x);
+        liquor = rootView.findViewById(R.id.y);
 
         liqOfood = "food";
 
-        y.setOnClickListener(new View.OnClickListener() {
+        //Default home
+        home();
+
+        //If click liquor
+        liquor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 liqOfood = "liquor";
                 foodSelect.setVisibility(View.GONE);
                 liqorSelect.setVisibility(View.VISIBLE);
-                System.out.println(liqOfood);
 
-                database.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        list.clear();
-
-                        for(DataSnapshot itemSnapshot : snapshot.getChildren()) {
-
-                            String itemType = itemSnapshot.child("itemType").getValue(String.class);
-
-                            if(liqOfood.equals("food") && itemType.equals("food")){
-                                System.out.println("hello");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel mainModel = new MainModel();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-
-                            }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                                System.out.println("Drinks");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel mainModel = new MainModel();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-                            }
-
-                            System.out.println("Test 1");
-                        }
-                        myAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                        System.out.println("error");
-                    }
-                });
+                home();
             }
         });
 
-        x.setOnClickListener(new View.OnClickListener() {
+        //If click food
+        food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 liqOfood = "food";
                 foodSelect.setVisibility(View.VISIBLE);
                 liqorSelect.setVisibility(View.GONE);
-                System.out.println(liqOfood);
 
-                database.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        list.clear();
-
-                        for(DataSnapshot itemSnapshot : snapshot.getChildren()) {
-
-                            String itemType = itemSnapshot.child("itemType").getValue(String.class);
-
-                            if(liqOfood.equals("food") && itemType.equals("food")){
-                                System.out.println("hello");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel mainModel = new MainModel();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItmImage(on4);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-
-                            }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                                System.out.println("Drinks");
-
-                                String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                                String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                                String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                                String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                                MainModel mainModel = new MainModel();
-
-                                mainModel.setItemName(on1);
-                                mainModel.setItemPrice(on2);
-                                mainModel.setItmImage(on3);
-                                mainModel.setItemQty(on4);
-
-                                list.add(mainModel);
-                            }
-
-                            System.out.println("Test 1");
-                        }
-                        myAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                        System.out.println("error");
-                    }
-                });
+                home();
             }
         });
 
+        return rootView;
+    }
+
+    public void home(){
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -208,7 +102,6 @@ public class HomeFragment extends Fragment {
                     String itemType = itemSnapshot.child("itemType").getValue(String.class);
 
                     if(liqOfood.equals("food") && itemType.equals("food")){
-                        System.out.println("hello");
 
                         String on1 = itemSnapshot.child("itemName").getValue(String.class);
                         String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
@@ -226,24 +119,21 @@ public class HomeFragment extends Fragment {
 
                     }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
 
-                        System.out.println("Drinks");
+                        String on1 = itemSnapshot.child("itemName").getValue(String.class);
+                        String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
+                        String on3 = itemSnapshot.child("itemImage").getValue(String.class);
+                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
 
-                            String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                            String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                            String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                            String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
+                        MainModel mainModel = new MainModel();
 
-                            MainModel mainModel = new MainModel();
+                        mainModel.setItemName(on1);
+                        mainModel.setItemPrice(on2);
+                        mainModel.setItmImage(on3);
+                        mainModel.setItemQty(on4);
 
-                            mainModel.setItemName(on1);
-                            mainModel.setItemPrice(on2);
-                            mainModel.setItmImage(on3);
-                            mainModel.setItemQty(on4);
+                        list.add(mainModel);
+                    }
 
-                            list.add(mainModel);
-                        }
-
-                    System.out.println("Test 1");
                 }
                 myAdapter.notifyDataSetChanged();
             }
@@ -254,7 +144,6 @@ public class HomeFragment extends Fragment {
                 System.out.println("error");
             }
         });
-
-        return rootView;
     }
+
 }
