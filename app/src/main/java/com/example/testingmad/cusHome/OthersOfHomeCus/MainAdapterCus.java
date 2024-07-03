@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testingmad.R;
+import com.example.testingmad.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,38 +63,53 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
             @Override
             public void onClick(View v) {
 //                if (model.itemName != null && on2 != null && on3 != null && on4 != null) {
-                    DatabaseReference DB = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Cart");
 
-                    DB.child("Cart").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            SharedPreferences sharedPreferences = context.getSharedPreferences("CurrentUser", context.MODE_PRIVATE);
-                            String customer = sharedPreferences.getString("userEmail", "");
+                SharedPreferences sharedPreferences = context.getSharedPreferences("CurrentUser", context.MODE_PRIVATE);
+                String customer = sharedPreferences.getString("userEmail", "");
 
-                            String k = DB.child("Cart").push().getKey();
-                            DB.child("Cart").child(k).child("customer").setValue(customer);
-                            DB.child("Cart").child(k).child("itemName").setValue(model.getName());
-                            DB.child("Cart").child(k).child("itemPrice").setValue(model.getPrice());
-                            DB.child("Cart").child(k).child("itemImage").setValue(model.getImage());
-                            DB.child("Cart").child(k).child("itemQuantity").setValue(model.getItemQty());
-                            DB.child("Cart").child(k).child("seller").setValue(model.getSeller());
-                            DB.child("Cart").child(k).child("ItemCode").setValue(model.getItemCode());
 
-                            System.out.println(model.getPrice());
-                            System.out.println(model.getSeller());
-                            System.out.println(model.getItemCode());
+                DB.orderByChild("customer").equalTo(customer).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        boolean itemExists = false;
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String itemCode = snapshot.child("ItemCode").getValue(String.class);
+                            if (itemCode != null && itemCode.equals(model.getItemCode())) {
+                                itemExists = true;
+                                break;
+                            }
+                        }
+
+                        if ((itemExists)) {
+
+                            Toast.makeText(context, "Item Already added", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            String k = DB.push().getKey();
+                            if (k != null) {
+                                DB.child(k).child("customer").setValue(customer);
+                                DB.child(k).child("itemName").setValue(model.getName());
+                                DB.child(k).child("itemPrice").setValue(model.getPrice());
+                                DB.child(k).child("itemImage").setValue(model.getImage());
+                                DB.child(k).child("itemQuantity").setValue(model.getItemQty());
+                                DB.child(k).child("seller").setValue(model.getSeller());
+                                DB.child(k).child("ItemCode").setValue(model.getItemCode());
+                            }
 
                             Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show();
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // Handle onCancelled
                         }
-                    });
-//                } else {
-//                    Toast.makeText(getContext(), "Please select an item to add to cart", Toast.LENGTH_SHORT).show();
-//                }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
             }
         });
 
