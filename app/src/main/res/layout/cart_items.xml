@@ -17,7 +17,7 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/forimg"
+            android:id="@+id/forimgCart"
             android:layout_weight="2"
             android:layout_width="100dp"
             android:layout_height="120dp"
@@ -33,7 +33,7 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/forName"
+                android:id="@+id/forNameCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
@@ -57,7 +57,7 @@
                     android:textSize="15dp"/>
 
                 <TextView
-                    android:id="@+id/forPrice"
+                    android:id="@+id/forPriceCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
@@ -81,7 +81,7 @@
                     android:layout_marginBottom="3dp"/>
 
                 <TextView
-                    android:id="@+id/forQty"
+                    android:id="@+id/forQtyCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
@@ -93,7 +93,7 @@
 
 
                 <Button
-                    android:id="@+id/order"
+                    android:id="@+id/orderOfCart"
                     android:layout_width="match_parent"
                     android:layout_marginHorizontal="10dp"
                     android:layout_height="40dp"
@@ -102,9 +102,18 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/cartDel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            android:textColor="@color/white"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp"
+            android:background="#860404"
+            android:textSize="19dp"/>
 
 
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

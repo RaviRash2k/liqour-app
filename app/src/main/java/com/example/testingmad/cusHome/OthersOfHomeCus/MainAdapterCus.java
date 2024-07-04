@@ -62,7 +62,7 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
         holder.addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (model.itemName != null && on2 != null && on3 != null && on4 != null) {
+
                 DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Cart");
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences("CurrentUser", context.MODE_PRIVATE);

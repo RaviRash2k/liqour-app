@@ -71,21 +71,14 @@ public class Cus_CartFragment extends Fragment {
                         String on3 = itemSnapshot.child("itemImage").getValue(String.class);
                         String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
                         String seller = itemSnapshot.child("User").getValue(String.class);
-                        String itemCode = itemSnapshot.getKey();
-
+                        String cartCode = itemSnapshot.getKey();
 
                         MainModel3 mainModel = new MainModel3();
                         mainModel.setItemName(on1);
                         mainModel.setItemPrice(on2);
                         mainModel.setItmImage(on3);
                         mainModel.setItemQty(on4);
-
-                        System.out.println("-----------------------------------------");
-                        System.out.println(customer);
-                        System.out.println(on1);
-                        System.out.println(on2);
-                        System.out.println(on3);
-                        System.out.println(on4);
+                        mainModel.setCartCode(cartCode);
 
                         list.add(mainModel);
                     }
@@ -95,7 +88,7 @@ public class Cus_CartFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled
+
             }
         });
     }

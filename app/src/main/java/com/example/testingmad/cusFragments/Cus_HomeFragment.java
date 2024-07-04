@@ -89,10 +89,14 @@ public class Cus_HomeFragment extends Fragment {
 
     // Fetch data from Firebase based on liqOfood
     private void fetchDataFromDatabase() {
+
+        System.out.println("07/24/t1");
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+
+                System.out.println("07/24/t2");
 
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemType = itemSnapshot.child("itemType").getValue(String.class);
@@ -126,7 +130,7 @@ public class Cus_HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled
+                System.out.println("07/24/t3");
             }
         });
     }
