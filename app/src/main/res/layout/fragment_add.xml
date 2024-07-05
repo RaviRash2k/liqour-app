@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="number"
             android:textAlignment="center"
             android:hint="Enter unit price" />
     </LinearLayout>
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="number"
             android:textAlignment="center"
             android:hint="Enter quantity of items" />
     </LinearLayout>

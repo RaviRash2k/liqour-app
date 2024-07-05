@@ -25,6 +25,7 @@
                 android:layout_marginBottom="15dp"
                 android:textSize="17sp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="Do you want to logout?" />
 
             <LinearLayout
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:text="Yes" />
 
             </LinearLayout>

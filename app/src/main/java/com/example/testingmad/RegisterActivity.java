@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String name = rname.getText().toString();
-                String email = remail.getText().toString();
+                String email = remail.getText().toString().trim();
                 String mobile = rmobile.getText().toString();
                 String pass = rpass.getText().toString();
                 String repass = reepass.getText().toString();

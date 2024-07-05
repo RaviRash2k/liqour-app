@@ -6,7 +6,7 @@
     android:gravity="center"
     android:paddingHorizontal="30dp"
     android:paddingVertical="21dp"
-    android:background="#1D000000"
+    android:background="#494949"
     android:id="@+id/main">
 
       <LinearLayout
@@ -16,6 +16,15 @@
           android:padding="16dp"
           android:gravity="center_vertical"
           android:background="@drawable/home_backg">
+
+          <TextView
+              android:id="@+id/oName"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="name"
+              android:layout_marginVertical="15dp"
+              android:textSize="25dp"
+              android:textAlignment="center"/>
 
           <TextView
               android:layout_width="wrap_content"
@@ -161,7 +170,7 @@
                       android:id="@+id/qtyOfOrd"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="0 "
+                      android:text="1"
                       android:padding="4dp"
                       android:textSize="20dp"
                       android:textColor="@color/black"

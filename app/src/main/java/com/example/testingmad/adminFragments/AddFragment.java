@@ -106,6 +106,8 @@ public class AddFragment extends Fragment {
                 desc = itemDesc.getText().toString();
                 qty = itemQty.getText().toString();
 
+                Integer.parseInt(qty);
+
                 //check food or liquor
                 food = rootView.findViewById(R.id.checkfood);
                 liquor = rootView.findViewById(R.id.checkliquor);

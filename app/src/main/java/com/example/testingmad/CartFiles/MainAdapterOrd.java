@@ -1,6 +1,7 @@
 package com.example.testingmad.CartFiles;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.testingmad.OrderManager.OrderForm;
 import com.example.testingmad.R;
 import com.example.testingmad.cusFragments.Cus_CartFragment;
 import com.google.firebase.database.DataSnapshot;
@@ -73,21 +75,29 @@ public class MainAdapterOrd extends RecyclerView.Adapter<MainAdapterOrd.MainView
             @Override
             public void onClick(View v) {
 
-                System.out.println(model.getCartCode());
-
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Cart").child(model.getCartCode());
 
                 database.removeValue()
                         .addOnSuccessListener(aVoid -> {
 
                             Toast.makeText(context, "Cart item removed", Toast.LENGTH_SHORT).show();
-
                         })
 
                         .addOnFailureListener(e -> {
                             System.err.println("Error removing data: " + e.getMessage());
                         });
+            }
+        });
 
+        //click order button
+        holder.ordInCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context, OrderForm.class);
+                i.putExtra("ItemCode", model.getItemCode());
+
+                context.startActivity(i);
             }
         });
     }
@@ -101,7 +111,7 @@ public class MainAdapterOrd extends RecyclerView.Adapter<MainAdapterOrd.MainView
 
         TextView itemName, itemPrice, itemQty, cartDel;
         ImageView itemImage;
-        Button addCart;
+        Button ordInCart;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,7 +120,7 @@ public class MainAdapterOrd extends RecyclerView.Adapter<MainAdapterOrd.MainView
             itemPrice = itemView.findViewById(R.id.forPriceCart);
             itemImage = itemView.findViewById(R.id.forimgCart);
             itemQty = itemView.findViewById(R.id.forQtyCart);
-            addCart = itemView.findViewById(R.id.orderOfCart);
+            ordInCart = itemView.findViewById(R.id.orderOfCart);
             cartDel = itemView.findViewById(R.id.cartDel);
 
         }

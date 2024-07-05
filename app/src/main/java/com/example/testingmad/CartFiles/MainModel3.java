@@ -2,7 +2,7 @@ package com.example.testingmad.CartFiles;
 
 public class MainModel3 {
 
-    String itemName, itemPrice, itmImage, itemQty, cartCode ;
+    String itemName, itemPrice, itmImage, itemQty, cartCode, itemCode ;
 
     //Setters
     public void setItemName(String itemName) {
@@ -25,7 +25,9 @@ public class MainModel3 {
         this.cartCode = cartCode;
     }
 
-
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
 
     //Getters
     public String getName() {
@@ -47,4 +49,7 @@ public class MainModel3 {
         return cartCode;
     }
 
+    public String getItemCode() {
+        return itemCode;
+    }
 }

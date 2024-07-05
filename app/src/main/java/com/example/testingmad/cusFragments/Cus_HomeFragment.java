@@ -41,7 +41,6 @@ public class Cus_HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cus__home, container, false);
 
-
         recyclerView = rootView.findViewById(R.id.rview1);
         database = FirebaseDatabase.getInstance().getReference().child("Items");
         recyclerView.setHasFixedSize(true);
@@ -56,14 +55,11 @@ public class Cus_HomeFragment extends Fragment {
         x = rootView.findViewById(R.id.x);
         y = rootView.findViewById(R.id.y);
 
-        // Set initial visibility
         foodSelect.setVisibility(View.VISIBLE);
         liqorSelect.setVisibility(View.GONE);
 
-        // Initial fetch based on default liqOfood value
         fetchDataFromDatabase();
 
-        // Toggle between food and liquor selection
         x.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,16 +83,12 @@ public class Cus_HomeFragment extends Fragment {
         return rootView;
     }
 
-    // Fetch data from Firebase based on liqOfood
     private void fetchDataFromDatabase() {
 
-        System.out.println("07/24/t1");
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-
-                System.out.println("07/24/t2");
 
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemType = itemSnapshot.child("itemType").getValue(String.class);
@@ -111,8 +103,6 @@ public class Cus_HomeFragment extends Fragment {
                         String seller = itemSnapshot.child("User").getValue(String.class);
                         String itemCode = itemSnapshot.getKey();
 
-                        System.out.println(seller);
-                        System.out.println(itemCode);
 
                         MainModel2 mainModel = new MainModel2();
                         mainModel.setItemName(on1);
@@ -130,7 +120,6 @@ public class Cus_HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("07/24/t3");
             }
         });
     }

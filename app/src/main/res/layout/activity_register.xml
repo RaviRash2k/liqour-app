@@ -39,7 +39,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:hint="Enter Email" />
 
     <EditText
@@ -50,7 +50,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="phone"
         android:hint="Enter Mobile number" />
 
     <EditText

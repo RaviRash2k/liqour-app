@@ -72,6 +72,8 @@ public class Cus_CartFragment extends Fragment {
                         String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
                         String seller = itemSnapshot.child("User").getValue(String.class);
                         String cartCode = itemSnapshot.getKey();
+                        String itemCode = itemSnapshot.child("ItemCode").getValue(String.class);
+
 
                         MainModel3 mainModel = new MainModel3();
                         mainModel.setItemName(on1);
@@ -79,6 +81,7 @@ public class Cus_CartFragment extends Fragment {
                         mainModel.setItmImage(on3);
                         mainModel.setItemQty(on4);
                         mainModel.setCartCode(cartCode);
+                        mainModel.setItemCode(itemCode);
 
                         list.add(mainModel);
                     }
