@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.testingmad.R;
 import com.example.testingmad.adminFragments.AccountFragment;
+import com.example.testingmad.adminFragments.AdOrdersFragment;
 import com.example.testingmad.adminFragments.AddFragment;
 import com.example.testingmad.adminFragments.HomeFragment;
 import com.example.testingmad.adminFragments.NotificationFragment;
@@ -43,6 +44,9 @@ public class AdminHome extends AppCompatActivity {
 
                 if(itemId == R.id.nhome){
                     loadFragment(new HomeFragment(), false);
+
+                }else if(itemId == R.id.norders){
+                    loadFragment(new AdOrdersFragment(), false);
 
                 }else if(itemId == R.id.nadd){
                     loadFragment(new AddFragment(), false);

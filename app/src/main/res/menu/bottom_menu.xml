@@ -8,12 +8,18 @@
         android:title="Home"
         android:icon="@drawable/baseline_home_24"/>
 
+    <item
+        android:id="@+id/norders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Alarts"
+        android:icon="@drawable/baseline_local_shipping_24"/>
 
     <item
         android:id="@+id/nadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Add"
+        android:title="Orders"
         android:icon="@drawable/baseline_add_circle_24"
         />
 
