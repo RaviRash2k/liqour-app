@@ -1,6 +1,7 @@
 package com.example.testingmad.cusHome.OthersOfHomeCus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.testingmad.MainActivity;
+import com.example.testingmad.OrderManager.OrderForm;
 import com.example.testingmad.R;
 import com.example.testingmad.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +38,7 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
 
     Context context;
     ArrayList<MainModel2> list;
+
 
     public MainAdapterCus(Context context, ArrayList<MainModel2> list) {
         this.context = context;
@@ -59,6 +63,19 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
             holder.itemImage.setImageResource(R.drawable.ic_launcher_background);
         }
 
+        //Order button
+        holder.orderCusHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context, OrderForm.class);
+                i.putExtra("ItemCode", model.getItemCode());
+
+                context.startActivity(i);
+            }
+        });
+
+        //Add cart button
         holder.addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +149,7 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
 
         TextView itemName, itemPrice, itemQty;
         ImageView itemImage;
-        Button addCart;
+        Button addCart, orderCusHome;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -142,6 +159,7 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
             itemImage = itemView.findViewById(R.id.forimg);
             itemQty = itemView.findViewById(R.id.forQty);
             addCart = itemView.findViewById(R.id.addCart);
+            orderCusHome = itemView.findViewById(R.id.orderCusHome);
         }
     }
 
