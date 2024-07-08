@@ -60,6 +60,7 @@ public class Cus_HomeFragment extends Fragment {
 
         fetchDataFromDatabase();
 
+        //click food button
         x.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,7 @@ public class Cus_HomeFragment extends Fragment {
             }
         });
 
+        //click liquor button
         y.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -34,7 +34,7 @@ public class OrderForm extends AppCompatActivity {
     Button ordCansel, ordBtn;
     int orderCount = 1;
     int lastPrice;
-    String itemCode, availableQty, itemName, itemPrice, seller, customer;
+    String itemCode, availableQty, itemName, itemPrice, seller, customer, itmimage;
     DatabaseReference DB, DBOrders;
 
     @Override
@@ -79,6 +79,7 @@ public class OrderForm extends AppCompatActivity {
                     availableQty = dataSnapshot.child("itemQuantity").getValue(String.class);
                     itemPrice = dataSnapshot.child("itemPrice").getValue(String.class);
                     seller = dataSnapshot.child("User").getValue(String.class);
+                    itmimage = dataSnapshot.child("itemImage").getValue(String.class);
 
                     //Set item name
                     ordItemName.setText(itemName);
@@ -174,6 +175,8 @@ public class OrderForm extends AppCompatActivity {
                     DBOrders = FirebaseDatabase.getInstance().getReference().child("Orders");
 
                     String key = DBOrders.push().getKey();
+                    DBOrders.child(key).child("OrderItemName").setValue(itemName);
+                    DBOrders.child(key).child("image").setValue(itmimage);
                     DBOrders.child(key).child("OrderEmail").setValue(email);
                     DBOrders.child(key).child("OrderMobile").setValue(mobile);
                     DBOrders.child(key).child("OrderAddress").setValue(address);
@@ -182,6 +185,7 @@ public class OrderForm extends AppCompatActivity {
                     DBOrders.child(key).child("OrderCusId").setValue(customer);
                     DBOrders.child(key).child("OrderSellerId").setValue(seller);
                     DBOrders.child(key).child("OrderLastPrice").setValue(String.valueOf(lastPrice));
+                    DBOrders.child(key).child("Status").setValue("pending");
                 }
             }
         });
