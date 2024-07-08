@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -146,6 +147,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
 
         //Set status
         holder.status.setText(model.getStatus());
+
+        //cansel button
+        String s = model.getStatus();
+        if(s.equals("pending")){
+            holder.ordDelete.setVisibility(View.VISIBLE);
+            holder.fback.setVisibility(View.GONE);
+
+        } else if (s.equals("deliver")) {
+            holder.fback.setVisibility(View.VISIBLE);
+            holder.ordDelete.setVisibility(View.GONE);
+
+        } else{
+            holder.ordDelete.setVisibility(View.GONE);
+            holder.fback.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -155,9 +171,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemPrice, itemQty, id, status;
+        TextView itemName, itemPrice, itemQty, id, status, ordDelete;
         ImageView itemImage;
-        Button ordDelete;
+        LinearLayout fback;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -168,7 +184,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
             itemQty = itemView.findViewById(R.id.ordq);
             id = itemView.findViewById(R.id.ordi);
             status = itemView.findViewById(R.id.ords);
-//            ordDelete = itemView.findViewById(R.id.ordd);
+            ordDelete = itemView.findViewById(R.id.ordd);
+            fback = itemView.findViewById(R.id.fback);
         }
     }
 

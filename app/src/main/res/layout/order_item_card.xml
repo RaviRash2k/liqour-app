@@ -2,83 +2,171 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:background="#E8E8E8"
     android:padding="8dp"
-    android:layout_margin="5dp">
-
-    <ImageView
-        android:id="@+id/ordImg"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_marginEnd="9dp"
-        android:layout_gravity="center"/>
+    android:layout_margin="4dp">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/ordImg"
+        android:layout_width="125dp"
+        android:layout_height="124dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginEnd="9dp"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#E8E8E8"
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/ordi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="order id"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
+            <TextView
+                android:id="@+id/ordi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="order id"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="9dp"/>
 
-        <TextView
-            android:id="@+id/ordn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textSize="13dp"
-            android:layout_marginBottom="3dp"/>
 
-        <TextView
-            android:id="@+id/ordp"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="price"
-            android:textSize="13dp"
-            android:layout_marginBottom="3dp"/>
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name :"
+                android:textStyle="italic"
+                android:paddingEnd="3dp"
+                android:textSize="16dp"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/ordn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="16dp"
+                android:layout_marginBottom="3dp"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/ordq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="qty"
-            android:textSize="13dp"
-            android:layout_marginBottom="3dp"/>
 
-        <TextView
-            android:id="@+id/ords"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="status"
-            android:textSize="13dp"
-            android:layout_marginBottom="3dp"/>
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RS :"
+                android:paddingEnd="3dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/ordp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="price"
+                android:textSize="16dp"
+                android:layout_marginBottom="3dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="qty :"
+                android:paddingEnd="3dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/ordq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="qty"
+                android:textSize="16dp"
+                android:layout_marginBottom="3dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status :"
+                android:paddingEnd="3dp"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/ords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status"
+                android:textSize="16dp"
+                android:layout_marginBottom="3dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
-        <TextView
-            android:id="@+id/ordd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="cansel order"
-            android:textColor="@color/white"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="8dp"
-            android:background="#860404"
-            android:textSize="16dp"/>
-
 </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/fback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feedback - "
+            android:paddingEnd="6dp"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            android:layout_marginBottom="3dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="16dp"
+            android:hint="Add your feedback"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ordd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="cansel order"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="8dp"
+        android:background="#860404"
+        android:textSize="16dp"/>
 
 </LinearLayout>

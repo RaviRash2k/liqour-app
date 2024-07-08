@@ -81,6 +81,8 @@ public class OrderForm extends AppCompatActivity {
                     seller = dataSnapshot.child("User").getValue(String.class);
                     itmimage = dataSnapshot.child("itemImage").getValue(String.class);
 
+                    lastPrice = Integer.parseInt(itemPrice);
+
                     //Set item name
                     ordItemName.setText(itemName);
                     unitPrice.setText(itemPrice);
@@ -134,7 +136,11 @@ public class OrderForm extends AppCompatActivity {
         ordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertDialog();
+
+                if(Integer.parseInt(availableQty) == 0){
+                    Toast.makeText(getApplicationContext(), "No items in stock", Toast.LENGTH_SHORT).show();
+
+                }else{showAlertDialog();}
             }
         });
 
@@ -186,6 +192,11 @@ public class OrderForm extends AppCompatActivity {
                     DBOrders.child(key).child("OrderSellerId").setValue(seller);
                     DBOrders.child(key).child("OrderLastPrice").setValue(String.valueOf(lastPrice));
                     DBOrders.child(key).child("Status").setValue("pending");
+
+                    updateQty();
+
+                    Intent i = new Intent(OrderForm.this, CustomerHome.class);
+                    startActivity(i);
                 }
             }
         });
@@ -198,5 +209,14 @@ public class OrderForm extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    //update quantity in database
+    public void updateQty(){
+
+        int newQty = Integer.parseInt(availableQty) - orderCount;
+
+        DatabaseReference updateQty = FirebaseDatabase.getInstance().getReference().child("Items").child(itemCode);
+        updateQty.child("itemQuantity").setValue(String.valueOf(newQty));
     }
 }

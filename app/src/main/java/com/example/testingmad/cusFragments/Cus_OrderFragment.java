@@ -128,8 +128,8 @@ public class Cus_OrderFragment extends Fragment {
 
                             OrderModel mainModel = new OrderModel();
                             mainModel.setItemName(on1);
-                            mainModel.setPrice(on2);
-                            mainModel.setImage(on3);
+                            mainModel.setPrice(on3);
+                            mainModel.setImage(on2);
                             mainModel.setQuantity(on4);
                             mainModel.setStatus(on5);
                             mainModel.setOrderId(on6);
