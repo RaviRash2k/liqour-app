@@ -79,6 +79,9 @@ public class Cus_CartFragment extends Fragment {
                         mainModel.setItemName(on1);
                         mainModel.setItemPrice(on2);
                         mainModel.setItmImage(on3);
+                        mainModel.setItemQty(on4);
+                        mainModel.setItemCode(itemCode);
+                        mainModel.setCartCode(cartCode);
 
                         list.add(mainModel);
                     }
