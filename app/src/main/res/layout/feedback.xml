@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:backgroundTint="@color/my_bckground"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/home_backg">
+
+    <TextView
+        android:id="@+id/feedbackAddUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/my_text"
+        android:textSize="15dp"
+        android:text="Name"/>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/feedbackComment"
+        android:layout_marginHorizontal="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/my_text"
+        android:textSize="17dp"/>
+
+
+</LinearLayout>

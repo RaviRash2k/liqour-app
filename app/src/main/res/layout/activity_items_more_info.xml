@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Quantity in stock"
+                android:text="In stock"
                 android:layout_marginEnd="8dp"
                 android:background="#D2D2D2"
                 android:textColor="@color/my_text"
@@ -150,7 +150,7 @@
                android:layout_marginTop="35dp"
                android:gravity="center"
                android:padding="8dp"
-               android:background="#D4D4D4"
+               android:background="#D8D8D8"
                android:orientation="horizontal">
 
                <EditText
@@ -161,13 +161,14 @@
                    android:layout_weight="1"
                    android:paddingStart="35dp"
                    android:textColor="@color/my_text"
-                   android:background="@color/white"
+                   android:background="@drawable/search_bacckg"
+                   android:textColorHint="#8D8D8D"
                    android:hint="Enter your feedback"/>
                <ImageButton
                    android:id="@+id/fbacksend"
                    android:layout_width="60dp"
                    android:layout_height="60dp"
-                   android:background="#D4D4D4"
+                   android:background="#D8D8D8"
                    android:src="@drawable/baseline_arrow"
                    android:scaleType="fitXY"
                    android:padding="5dp" />

@@ -17,8 +17,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.testingmad.CartFiles.MainAdapterOrd;
+import com.example.testingmad.CartFiles.MainModel3;
 import com.example.testingmad.R;
+import com.example.testingmad.feedbacks.FeedbackAdapter;
+import com.example.testingmad.feedbacks.FeedbackModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,15 +35,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ItemsMoreInfo extends AppCompatActivity {
 
     ImageView proImage;
     TextView proName, proCode, proPrice, proQty, proDesc;
-    String itemCode;
+    String itemCode, uName;
     ImageButton fbacksend;
     EditText fback;
     DatabaseReference DB;
+    RecyclerView recyclerView;
+    FeedbackAdapter myAdapter;
+    ArrayList<FeedbackModel> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,14 @@ public class ItemsMoreInfo extends AppCompatActivity {
         Intent intent = getIntent();
         itemCode = intent.getStringExtra("ItemCode");
 
+        recyclerView = findViewById(R.id.rview5);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ItemsMoreInfo.this));
+
+        list = new ArrayList<>();
+        myAdapter = new FeedbackAdapter(ItemsMoreInfo.this, list);
+        recyclerView.setAdapter(myAdapter);
+
         proName = findViewById(R.id.proname);
         proCode = findViewById(R.id.procode);
         proPrice = findViewById(R.id.proprice);
@@ -58,6 +76,8 @@ public class ItemsMoreInfo extends AppCompatActivity {
 
         fbacksend = findViewById(R.id.fbacksend);
         fback = findViewById(R.id.fbackadd);
+
+        fetchDataFromDatabase();
 
         DB = FirebaseDatabase.getInstance().getReference().child("Items").child(itemCode);
 
@@ -110,7 +130,7 @@ public class ItemsMoreInfo extends AppCompatActivity {
                     //add data to db
                     DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Feedbacks").child(itemCode);
 
-                    database.child(customer).child("feedback").setValue(feedback);
+                    database.child(customer).setValue(feedback);
 
                     fback.setText("");
                     Toast.makeText(ItemsMoreInfo.this, "Feedback added", Toast.LENGTH_SHORT).show();
@@ -149,6 +169,44 @@ public class ItemsMoreInfo extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         }
+    }
+
+    private void fetchDataFromDatabase() {
+
+        DatabaseReference databaseFb = FirebaseDatabase.getInstance().getReference().child("Feedbacks").child(itemCode);
+        databaseFb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    String user = dataSnapshot.getKey();
+                    String feedback = dataSnapshot.getValue(String.class); // Fetch feedback directly
+
+                    DatabaseReference userNameRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user).child("userName");
+                    userNameRef.addListenerForSingleValueEvent(new ValueEventListener() { // Use single event listener
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                String userName = dataSnapshot.getValue(String.class); // Fetch userName
+                                FeedbackModel mainModel = new FeedbackModel();
+                                mainModel.setFeedback(feedback);
+                                mainModel.setUserName(userName);
+                                list.add(mainModel);
+                                myAdapter.notifyDataSetChanged(); // Notify adapter inside this listener
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
 

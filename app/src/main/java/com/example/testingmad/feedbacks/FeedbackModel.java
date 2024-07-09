@@ -1,8 +1,8 @@
 package com.example.testingmad.feedbacks;
 
-public class feedbackModel {
+public class FeedbackModel {
 
-    String userName, feedback, itemCode;
+    String userName, feedback;
 
     public String getUserName() {
         return userName;
@@ -20,11 +20,4 @@ public class feedbackModel {
         this.feedback = feedback;
     }
 
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
 }

@@ -59,79 +59,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
         // Load image
         if (model.getImage() != null && !model.getImage().isEmpty()) {
             new OrderAdapter.LoadImageTask(holder.itemImage).execute(model.getImage());
+
         } else {
             holder.itemImage.setImageResource(R.drawable.ic_launcher_background);
         }
-
-        //Order button
-//        holder.orderCusHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent i = new Intent(context, OrderForm.class);
-//                i.putExtra("ItemCode", model.getItemCode());
-//
-//                context.startActivity(i);
-//            }
-//        });
-
-        //Add cart button
-//        System.out.println("del");
-        //        holder.addCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                DatabaseReference DB = FirebaseDatabase.getInstance().getReference().child("Cart");
-//
-//                SharedPreferences sharedPreferences = context.getSharedPreferences("CurrentUser", context.MODE_PRIVATE);
-//                String customer = sharedPreferences.getString("userEmail", "");
-//
-//
-//                DB.orderByChild("customer").equalTo(customer).addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                        boolean itemExists = false;
-//
-//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                            String itemCode = snapshot.child("ItemCode").getValue(String.class);
-//                            if (itemCode != null && itemCode.equals(model.getItemCode())) {
-//                                itemExists = true;
-//                                break;
-//                            }
-//                        }
-//
-//                        if ((itemExists)) {
-//
-//                            Toast.makeText(context, "Item Already added", Toast.LENGTH_SHORT).show();
-//
-//                        } else {
-//                            String k = DB.push().getKey();
-//                            if (k != null) {
-//                                DB.child(k).child("customer").setValue(customer);
-//                                DB.child(k).child("itemName").setValue(model.getName());
-//                                DB.child(k).child("itemPrice").setValue(model.getPrice());
-//                                DB.child(k).child("itemImage").setValue(model.getImage());
-//                                DB.child(k).child("itemQuantity").setValue(model.getItemQty());
-//                                DB.child(k).child("seller").setValue(model.getSeller());
-//                                DB.child(k).child("ItemCode").setValue(model.getItemCode());
-//                            }
-//
-//                            Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    }
-//                });
-//
-//            }
-//        });
-
-        // Set item name
 
         //Set order id
         holder.id.setText(model.getOrderId());
