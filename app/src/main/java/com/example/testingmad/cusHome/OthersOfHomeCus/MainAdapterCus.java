@@ -22,6 +22,7 @@ import com.example.testingmad.MainActivity;
 import com.example.testingmad.OrderManager.OrderForm;
 import com.example.testingmad.R;
 import com.example.testingmad.RegisterActivity;
+import com.example.testingmad.cusHome.ItemsMoreInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -130,6 +131,20 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
             }
         });
 
+        //More info
+        holder.moreinfo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String itemCodex = model.getItemCode();
+                System.out.println("ItemCode from model: " + itemCodex);
+
+                Intent i = new Intent(context, ItemsMoreInfo.class);
+                i.putExtra("ItemCode", itemCodex);
+                context.startActivity(i);
+            }
+        });
+
         // Set item name
         holder.itemName.setText(model.getName());
 
@@ -147,13 +162,14 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemPrice, itemQty;
+        TextView itemName, itemPrice, itemQty, moreinfo1;
         ImageView itemImage;
         Button addCart, orderCusHome;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            moreinfo1 = itemView.findViewById(R.id.moreinfo1);
             itemName = itemView.findViewById(R.id.forName);
             itemPrice = itemView.findViewById(R.id.forPrice);
             itemImage = itemView.findViewById(R.id.forimg);

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="25dp"
+    tools:context=".cusHome.ItemsMoreInfo"
+    android:background="@color/my_bckground">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/my_bckground"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/proimg"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/proname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Name"
+                android:textColor="@color/my_text"
+                android:textSize="25dp"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Item Code"
+                    android:layout_marginEnd="8dp"
+                    android:background="#D2D2D2"
+                    android:textColor="@color/my_text"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/procode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Code"
+                    android:textColor="@color/my_text"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Price"
+                android:layout_marginEnd="8dp"
+                android:background="#D2D2D2"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="LKR"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/proprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Price"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Quantity in stock"
+                android:layout_marginEnd="8dp"
+                android:background="#D2D2D2"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/proqty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Quantity"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Description"
+                android:layout_marginEnd="8dp"
+                android:background="#D2D2D2"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/prodesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Description"
+                android:textColor="@color/my_text"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rview5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:background="@drawable/home_backg"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
