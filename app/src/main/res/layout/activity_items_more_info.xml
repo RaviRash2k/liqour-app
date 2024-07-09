@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Name"
+                android:textStyle="bold"
                 android:textColor="@color/my_text"
                 android:textSize="25dp"
                 android:textAlignment="center"/>
@@ -142,6 +143,35 @@
                 android:textColor="@color/my_text"
                 android:textSize="20dp" />
         </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="35dp"
+               android:gravity="center"
+               android:padding="8dp"
+               android:background="#D4D4D4"
+               android:orientation="horizontal">
+
+               <EditText
+                   android:id="@+id/fbackadd"
+                   android:layout_width="wrap_content"
+                   android:layout_height="50dp"
+                   android:padding="7dp"
+                   android:layout_weight="1"
+                   android:paddingStart="35dp"
+                   android:textColor="@color/my_text"
+                   android:background="@color/white"
+                   android:hint="Enter your feedback"/>
+               <ImageButton
+                   android:id="@+id/fbacksend"
+                   android:layout_width="60dp"
+                   android:layout_height="60dp"
+                   android:background="#D4D4D4"
+                   android:src="@drawable/baseline_arrow"
+                   android:scaleType="fitXY"
+                   android:padding="5dp" />
+           </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rview5"

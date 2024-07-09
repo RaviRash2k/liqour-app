@@ -1,13 +1,18 @@
 package com.example.testingmad.cusHome;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -30,6 +35,8 @@ public class ItemsMoreInfo extends AppCompatActivity {
     ImageView proImage;
     TextView proName, proCode, proPrice, proQty, proDesc;
     String itemCode;
+    ImageButton fbacksend;
+    EditText fback;
     DatabaseReference DB;
 
     @Override
@@ -48,6 +55,9 @@ public class ItemsMoreInfo extends AppCompatActivity {
         proQty = findViewById(R.id.proqty);
         proDesc = findViewById(R.id.prodesc);
         proImage = findViewById(R.id.proimg);
+
+        fbacksend = findViewById(R.id.fbacksend);
+        fback = findViewById(R.id.fbackadd);
 
         DB = FirebaseDatabase.getInstance().getReference().child("Items").child(itemCode);
 
@@ -78,6 +88,33 @@ public class ItemsMoreInfo extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        //Sending feedbacks
+        fbacksend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get user entered feedback
+                String feedback = fback.getText().toString();
+
+                if(feedback.isEmpty()){
+
+                    Toast.makeText(ItemsMoreInfo.this, "Enter your feedback", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    //get cus from sharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+                    String customer = sharedPreferences.getString("userEmail", "");
+
+                    //add data to db
+                    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Feedbacks").child(itemCode);
+
+                    database.child(customer).child("feedback").setValue(feedback);
+
+                    fback.setText("");
+                    Toast.makeText(ItemsMoreInfo.this, "Feedback added", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -113,4 +150,6 @@ public class ItemsMoreInfo extends AppCompatActivity {
             }
         }
     }
+
+
 }
