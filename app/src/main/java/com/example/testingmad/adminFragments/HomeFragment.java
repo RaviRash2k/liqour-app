@@ -101,12 +101,15 @@ public class HomeFragment extends Fragment {
 
                     String itemType = itemSnapshot.child("itemType").getValue(String.class);
 
-                    if(liqOfood.equals("food") && itemType.equals("food")){
+                    if(liqOfood.equals("food") && itemType.equals("food") ||
+                            liqOfood.equals("liquor") && itemType.equals("liquor")){
 
                         String on1 = itemSnapshot.child("itemName").getValue(String.class);
                         String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
                         String on3 = itemSnapshot.child("itemImage").getValue(String.class);
                         String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
+                        String seller = itemSnapshot.child("User").getValue(String.class);
+                        String itemCode = itemSnapshot.getKey();
 
                         MainModel mainModel = new MainModel();
 
@@ -114,26 +117,12 @@ public class HomeFragment extends Fragment {
                         mainModel.setItemPrice(on2);
                         mainModel.setItmImage(on3);
                         mainModel.setItemQty(on4);
+                        mainModel.setSeller(seller);
+                        mainModel.setItemCode(itemCode);
 
                         list.add(mainModel);
 
-                    }else if(liqOfood.equals("liquor") && itemType.equals("liquor")){
-
-                        String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                        String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                        String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-
-                        MainModel mainModel = new MainModel();
-
-                        mainModel.setItemName(on1);
-                        mainModel.setItemPrice(on2);
-                        mainModel.setItmImage(on3);
-                        mainModel.setItemQty(on4);
-
-                        list.add(mainModel);
                     }
-
                 }
                 myAdapter.notifyDataSetChanged();
             }

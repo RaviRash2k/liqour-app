@@ -42,6 +42,7 @@
                 android:layout_marginTop="76dp"
                 android:background="@color/white"
                 android:text="edit"
+                android:textColor="@color/my_text"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/proPic"
@@ -94,6 +95,7 @@
                     android:layout_marginBottom="1dp"
                     android:gravity="center_horizontal"
                     android:text="hello"
+                    android:textColor="@color/my_text"
                     android:textSize="19dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -170,7 +172,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="10dp"
-            android:backgroundTint="#5F2020"
+            android:backgroundTint="#640808"
+            android:textColor="@color/white"
             android:text="logout"
             android:textAlignment="center" />
 
@@ -179,7 +182,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="612dp"
+        android:layout_height="match_parent"
         android:background="#E6E6E6">
 
         <LinearLayout

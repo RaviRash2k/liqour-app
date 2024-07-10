@@ -137,7 +137,6 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
             public void onClick(View v) {
 
                 String itemCodex = model.getItemCode();
-                System.out.println("ItemCode from model: " + itemCodex);
 
                 Intent i = new Intent(context, ItemsMoreInfo.class);
                 i.putExtra("ItemCode", itemCodex);

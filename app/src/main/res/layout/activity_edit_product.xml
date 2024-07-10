@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="@color/my_bckground"
+    tools:context=".adminHome.EditProduct">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/home_backg"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit product"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:layout_marginBottom="24dp"/>
+            <TextView
+                android:id="@+id/delpro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:background="#9B2424"
+                android:drawableStart="@drawable/baseline_delete"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit name: "
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/editname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter product name"
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit quantity: "
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/editqty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter quantity in stock"
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit price: "
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/editprice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter new price"
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit description: "
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/editdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter description"
+                android:textColor="@color/my_text"
+                android:textSize="17dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+            <Button
+                android:id="@+id/editcansel"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="cansel"
+                android:layout_marginEnd="30dp"/>
+            <Button
+                android:id="@+id/editupdate"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Update"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

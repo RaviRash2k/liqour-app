@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class ItemsMoreInfo extends AppCompatActivity {
 
     ImageView proImage;
     TextView proName, proCode, proPrice, proQty, proDesc;
+    LinearLayout loutfbck;
     String itemCode, uName;
     ImageButton fbacksend;
     EditText fback;
@@ -74,10 +76,21 @@ public class ItemsMoreInfo extends AppCompatActivity {
         proDesc = findViewById(R.id.prodesc);
         proImage = findViewById(R.id.proimg);
 
+        loutfbck = findViewById(R.id.loutfbck);
+
         fbacksend = findViewById(R.id.fbacksend);
         fback = findViewById(R.id.fbackadd);
 
         fetchDataFromDatabase();
+
+        SharedPreferences prf2 = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        String tpe = prf2.getString("type", "");
+
+        if(tpe.equals("customer")){
+            loutfbck.setVisibility(View.VISIBLE);
+        }else{
+            loutfbck.setVisibility(View.GONE);
+        }
 
         DB = FirebaseDatabase.getInstance().getReference().child("Items").child(itemCode);
 

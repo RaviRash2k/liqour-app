@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
             SharedPreferences prf2 = getSharedPreferences("CurrentUser", MODE_PRIVATE);
             String x = prf2.getString("type", "");
-            System.out.println(x);
 
             switch (x) {
                 case "admin":

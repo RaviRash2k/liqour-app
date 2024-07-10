@@ -2,7 +2,7 @@ package com.example.testingmad.adminHome.OthersOfHome;
 
 public class MainModel {
 
-    String itemName, itemPrice, itmImage, itemQty;
+    String itemName, itemPrice, itmImage, itemQty, seller, itemCode;
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
@@ -18,6 +18,22 @@ public class MainModel {
 
     public void setItemQty(String itemQty) {
         this.itemQty = itemQty;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
     }
 
     public String getItemQty() {

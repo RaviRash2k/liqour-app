@@ -108,6 +108,8 @@
                     android:layout_height="40dp"
                     android:text="cart"
                     android:textSize="12dp"
+                    android:backgroundTint="@color/my_green"
+                    android:textColor="@color/white"
                     android:layout_marginEnd="13dp"/>
 
                 <Button
@@ -115,6 +117,8 @@
                     android:layout_width="85dp"
                     android:layout_height="40dp"
                     android:textSize="12dp"
+                    android:backgroundTint="@color/my_green"
+                    android:textColor="@color/white"
                     android:text="order"/>
 
             </LinearLayout>

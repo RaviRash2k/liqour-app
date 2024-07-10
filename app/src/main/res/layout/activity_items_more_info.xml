@@ -145,6 +145,7 @@
         </LinearLayout>
 
            <LinearLayout
+               android:id="@+id/loutfbck"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginTop="35dp"
@@ -174,13 +175,27 @@
                    android:padding="5dp" />
            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rview5"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"
-                android:background="@drawable/home_backg"/>
+                android:background="@drawable/home_backg">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Feedbacks"
+                    android:textColor="@color/my_text"
+                    android:textSize="23dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rview5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 
