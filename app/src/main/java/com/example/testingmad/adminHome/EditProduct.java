@@ -113,7 +113,6 @@ public class EditProduct extends AppCompatActivity {
                                 Toast.makeText(EditProduct.this, "Failed to update product", Toast.LENGTH_SHORT).show();
                             }
                         });
-
                     }
                 }
             }

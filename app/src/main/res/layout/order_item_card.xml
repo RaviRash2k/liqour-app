@@ -13,8 +13,8 @@
     android:orientation="horizontal">
     <ImageView
         android:id="@+id/ordImg"
-        android:layout_width="125dp"
-        android:layout_height="124dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:src="@drawable/ic_launcher_background"
         android:layout_marginEnd="9dp"
         android:layout_gravity="center"/>
@@ -146,22 +146,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:background="#D8D8D8"
         android:visibility="gone">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Feedback - "
-            android:paddingEnd="6dp"
-            android:textSize="16dp"
-            android:textStyle="italic"
-            android:layout_marginBottom="3dp"/>
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/fbackinord"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:textSize="16dp"
-            android:hint="Add your feedback"/>
-
+            android:padding="7dp"
+            android:layout_weight="1"
+            android:paddingStart="35dp"
+            android:textColor="@color/my_text"
+            android:background="@drawable/search_bacckg"
+            android:textColorHint="#8D8D8D"
+            android:hint="Enter your feedback"/>
+        <ImageButton
+            android:id="@+id/fbacksendinord"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/baseline_arrow"
+            android:background="#D8D8D8"
+            android:scaleType="fitXY"
+            android:padding="5dp" />
 
     </LinearLayout>
 

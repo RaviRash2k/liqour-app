@@ -1,6 +1,7 @@
 package com.example.testingmad.OrderManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,17 +12,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testingmad.R;
 import com.example.testingmad.OrderManager.OrderAdapter;
 import com.example.testingmad.OrderManager.OrderModel;
+import com.example.testingmad.adminHome.AdminHome;
+import com.example.testingmad.adminHome.EditProduct;
+import com.example.testingmad.cusHome.CustomerHome;
+import com.example.testingmad.cusHome.ItemsMoreInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,13 +89,104 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
         //Set status
         holder.status.setText(model.getStatus());
 
-        //cansel button
+        //cansel button and add feedback visibility
         String s = model.getStatus();
+
         if(s.equals("pending")){
             holder.ordDelete.setVisibility(View.VISIBLE);
             holder.fback.setVisibility(View.GONE);
 
-        } else if (s.equals("deliver")) {
+            //delete button
+            holder.ordDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //Alert of click cansel when status pending
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setMessage("Are you sure delete order ?");
+
+                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Orders").child(model.getOrderId());
+                            database.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(v.getContext(), "Order deleted successfully", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Toast.makeText(v.getContext(), "Failed to delete order", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+
+        }else if(s.equals("packing")){
+            holder.ordDelete.setVisibility(View.VISIBLE);
+            holder.fback.setVisibility(View.GONE);
+
+            holder.ordDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Orders").child(model.getOrderId());
+
+                    //Alert of click cansel when status pending
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setMessage("Are you sure delete order ?");
+
+                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            database.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+
+                                        database.child("Status").setValue("cancelled");
+
+                                        Toast.makeText(v.getContext(), "Order deleted successfully", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Toast.makeText(v.getContext(), "Order not found", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(v.getContext(), "Failed to delete product", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            });
+
+        } else if (s.equals("delivered")) {
             holder.fback.setVisibility(View.VISIBLE);
             holder.ordDelete.setVisibility(View.GONE);
 
@@ -93,6 +194,33 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
             holder.ordDelete.setVisibility(View.GONE);
             holder.fback.setVisibility(View.GONE);
         }
+
+        //Send feedbacks
+        holder.fbacksendinord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get user entered feedback
+                String feedback = holder.fbackinord.getText().toString();
+
+                if(feedback.isEmpty()){
+
+                    Toast.makeText(v.getContext(), "Enter your feedback", Toast.LENGTH_SHORT).show();
+
+                }else{
+                    //get cus from sharedPreferences
+                    SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+                    String customer = sharedPreferences.getString("userEmail", "");
+
+                    //add data to db
+                    DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Feedbacks").child(model.getItemID());
+
+                    database.child(customer).setValue(feedback);
+
+                    holder.fbackinord.setText("");
+                    Toast.makeText(v.getContext(), "Feedback added", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -105,6 +233,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
         TextView itemName, itemPrice, itemQty, id, status, ordDelete;
         ImageView itemImage;
         LinearLayout fback;
+        EditText fbackinord;
+        ImageButton fbacksendinord;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +247,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
             status = itemView.findViewById(R.id.ords);
             ordDelete = itemView.findViewById(R.id.ordd);
             fback = itemView.findViewById(R.id.fback);
+
+            fbackinord = itemView.findViewById(R.id.fbackinord);
+            fbacksendinord = itemView.findViewById(R.id.fbacksendinord);
         }
     }
 

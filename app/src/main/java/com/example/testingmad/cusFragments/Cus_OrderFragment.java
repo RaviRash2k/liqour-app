@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class Cus_OrderFragment extends Fragment {
 
     DatabaseReference database;
-    TextView pending, shipped, deliver;
+    TextView pending, shipped, deliver, packing;
     RecyclerView recyclerView;
     String status = "pending";
     ArrayList<OrderModel> list;
@@ -48,6 +48,7 @@ public class Cus_OrderFragment extends Fragment {
         pending = rootView.findViewById(R.id.pending);
         shipped = rootView.findViewById(R.id.shiped);
         deliver = rootView.findViewById(R.id.deliver);
+        packing = rootView.findViewById(R.id.packing);
 
         database = FirebaseDatabase.getInstance().getReference().child("Orders");
         sharedPreferences = requireActivity().getSharedPreferences("CurrentUser", getContext().MODE_PRIVATE);
@@ -64,6 +65,20 @@ public class Cus_OrderFragment extends Fragment {
             public void onClick(View v) {
                 status = "pending";
                 pending.setTextColor(ContextCompat.getColor(requireContext(), R.color.my_green));
+                packing.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                shipped.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                deliver.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                fetchDataFromDatabase();
+            }
+        });
+
+        //packing
+        packing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                status = "packing";
+                packing.setTextColor(ContextCompat.getColor(requireContext(), R.color.my_green));
+                pending.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 shipped.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 deliver.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 fetchDataFromDatabase();
@@ -75,6 +90,7 @@ public class Cus_OrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 status = "shipped";
+                packing.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 shipped.setTextColor(ContextCompat.getColor(requireContext(), R.color.my_green));
                 deliver.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 pending.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
@@ -86,7 +102,8 @@ public class Cus_OrderFragment extends Fragment {
         deliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = "deliver";
+                status = "delivered";
+                packing.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 deliver.setTextColor(ContextCompat.getColor(requireContext(), R.color.my_green));
                 shipped.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 pending.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
@@ -114,9 +131,9 @@ public class Cus_OrderFragment extends Fragment {
                         if ((DBstatus != null) &&
                                 ((status.equals("pending") && DBstatus.equals("pending")) ||
                                         (status.equals("shipped") && DBstatus.equals("shipped")) ||
-                                        (status.equals("deliver") && DBstatus.equals("deliver")))) {
+                                        (status.equals("delivered") && DBstatus.equals("delivered")) ||
+                                        (status.equals("packing") && DBstatus.equals("packing")))) {
 
-                            System.out.println("test 3");
                             String itemId = itemSnapshot.child("OrderItemId").getValue(String.class);
 
                             String on1 = itemSnapshot.child("OrderItemName").getValue(String.class);
@@ -133,11 +150,10 @@ public class Cus_OrderFragment extends Fragment {
                             mainModel.setQuantity(on4);
                             mainModel.setStatus(on5);
                             mainModel.setOrderId(on6);
+                            mainModel.setItemID(itemId);
 
                             list.add(mainModel);
-                        }else{
-                            System.out.println("x");
-                        }
+                        }else{ }
                     }
                 }
                 adapter.notifyDataSetChanged();

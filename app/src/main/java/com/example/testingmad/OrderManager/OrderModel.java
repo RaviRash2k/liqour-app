@@ -2,7 +2,7 @@ package com.example.testingmad.OrderManager;
 
 public class OrderModel {
 
-    String itemName, price, quantity, image, status, orderId;
+    String itemName, price, quantity, image, status, orderId, itemID;
 
     public String getItemName() {
         return itemName;
@@ -50,5 +50,13 @@ public class OrderModel {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 }
