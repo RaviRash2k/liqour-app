@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testingmad.R;
+import com.example.testingmad.adminHome.EditProduct;
 import com.example.testingmad.cusHome.ItemsMoreInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -77,7 +78,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, ItemsMoreInfo.class));
+                context.startActivity(new Intent(context, EditProduct.class));
             }
         });
 

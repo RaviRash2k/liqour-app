@@ -38,63 +38,76 @@ public class EditProduct extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_edit_product);
 
-//        editname = findViewById(R.id.editname);
-//        editprice = findViewById(R.id.editprice);
-//        editqty = findViewById(R.id.editqty);
-//        editdesc = findViewById(R.id.editdesc);
-//
-//        delpro = findViewById(R.id.delpro);
-//
-//        editcansel = findViewById(R.id.editcansel);
-//        editupdate = findViewById(R.id.editupdate);
-//
-//        //Update button click
-//        editupdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String name = editname.getText().toString();
-//                String price = editprice.getText().toString();
-//                String qty = editqty.getText().toString();
-//                String desc = editdesc.getText().toString();
-//
-//                if(name.isEmpty() || price.isEmpty() || qty.isEmpty() || desc.isEmpty()){
-//
-//                    Toast.makeText(EditProduct.this,"Fill all fields",Toast.LENGTH_SHORT).show();
-//
-//                }else{
-//
-//                    DB.orderByKey().equalTo(getEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                            if (dataSnapshot.exists()) {
-//
-//                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-//                                    String userId = userSnapshot.getKey();
-//
-//                                    DB.child(userId).child("password").setValue(getPass);
-//
-//                                    Toast.makeText(EditProduct.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
-//                                    startActivity(new Intent(EditProduct.this, MainActivity.class));
-//                                    finish();
-//                                    return;
-//                                }
-//
-//                            }else{
-//                                Toast.makeText(EditProduct.this,"Email doesn't exit",Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        editname = findViewById(R.id.editname);
+        editprice = findViewById(R.id.editprice);
+        editqty = findViewById(R.id.editqty);
+        editdesc = findViewById(R.id.editdesc);
+
+        delpro = findViewById(R.id.delpro);
+
+        editcansel = findViewById(R.id.editcansel);
+        editupdate = findViewById(R.id.editupdate);
+
+        //Update button click
+        editupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String name = editname.getText().toString();
+                String price = editprice.getText().toString();
+                String qty = editqty.getText().toString();
+                String desc = editdesc.getText().toString();
+
+                if(name.isEmpty() && price.isEmpty() && qty.isEmpty() && desc.isEmpty()){
+
+                    Toast.makeText(EditProduct.this,"Fill all fields",Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    // Get itemCode from intent
+                    Intent intent = getIntent();
+                    String itemCode = intent.getStringExtra("ItemCode");
+
+                    if (itemCode == null || itemCode.isEmpty()) {
+                        Toast.makeText(EditProduct.this, "Item code is missing", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    }else{
+                        DB.child(itemCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    DB.child(itemCode).child("itemName").setValue(name);
+                                    DB.child(itemCode).child("itemPrice").setValue(price);
+                                    DB.child(itemCode).child("itemQuantity").setValue(qty);
+                                    DB.child(itemCode).child("itemDescription").setValue(desc);
+
+                                    Toast.makeText(EditProduct.this, "Product updated successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(EditProduct.this, AdminHome.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(EditProduct.this, "Item not found", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(EditProduct.this, "Failed to update product", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+
+        //click update cansel button
+        editcansel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditProduct.this, AdminHome.class));
+            }
+        });
 
     }
 }
