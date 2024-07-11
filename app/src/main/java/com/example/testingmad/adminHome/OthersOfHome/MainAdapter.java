@@ -78,7 +78,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, EditProduct.class));
+
+                String itemCodex = model.getItemCode();
+
+                Intent i = new Intent(context, EditProduct.class);
+                i.putExtra("ItemCode", itemCodex);
+                context.startActivity(i);
             }
         });
 

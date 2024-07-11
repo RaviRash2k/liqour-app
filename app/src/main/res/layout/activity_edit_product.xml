@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter quantity in stock"
                 android:textColor="@color/my_text"
+                android:inputType="number"
                 android:textSize="17dp"/>
         </LinearLayout>
 
@@ -97,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter new price"
+                android:inputType="number"
                 android:textColor="@color/my_text"
                 android:textSize="17dp"/>
         </LinearLayout>
@@ -131,11 +133,15 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="cansel"
+                android:textColor="@color/white"
+                android:backgroundTint="#772121"
                 android:layout_marginEnd="30dp"/>
             <Button
                 android:id="@+id/editupdate"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/my_green"
                 android:text="Update"/>
         </LinearLayout>
 

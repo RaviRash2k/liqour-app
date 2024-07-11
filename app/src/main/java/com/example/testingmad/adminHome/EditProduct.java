@@ -60,13 +60,14 @@ public class EditProduct extends AppCompatActivity {
 
                 if(name.isEmpty() && price.isEmpty() && qty.isEmpty() && desc.isEmpty()){
 
-                    Toast.makeText(EditProduct.this,"Fill all fields",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProduct.this,"Fill need fields",Toast.LENGTH_SHORT).show();
 
                 }else{
 
                     // Get itemCode from intent
                     Intent intent = getIntent();
                     String itemCode = intent.getStringExtra("ItemCode");
+                    System.out.println("codeeeee" + itemCode);
 
                     if (itemCode == null || itemCode.isEmpty()) {
                         Toast.makeText(EditProduct.this, "Item code is missing", Toast.LENGTH_SHORT).show();
@@ -77,14 +78,31 @@ public class EditProduct extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
-                                    DB.child(itemCode).child("itemName").setValue(name);
-                                    DB.child(itemCode).child("itemPrice").setValue(price);
-                                    DB.child(itemCode).child("itemQuantity").setValue(qty);
-                                    DB.child(itemCode).child("itemDescription").setValue(desc);
+
+                                    //name
+                                    if(!name.isEmpty()){
+                                        DB.child(itemCode).child("itemName").setValue(name);
+                                    }
+
+                                    //price
+                                    if(!price.isEmpty()){
+                                        DB.child(itemCode).child("itemPrice").setValue(price);
+                                    }
+
+                                    //quantity
+                                    if(!qty.isEmpty()){
+                                        DB.child(itemCode).child("itemQuantity").setValue(qty);
+                                    }
+
+                                    //description
+                                    if(!desc.isEmpty()){
+                                        DB.child(itemCode).child("itemDescription").setValue(desc);
+                                    }
 
                                     Toast.makeText(EditProduct.this, "Product updated successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(EditProduct.this, AdminHome.class));
                                     finish();
+
                                 } else {
                                     Toast.makeText(EditProduct.this, "Item not found", Toast.LENGTH_SHORT).show();
                                 }
