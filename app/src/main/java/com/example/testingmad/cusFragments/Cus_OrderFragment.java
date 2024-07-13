@@ -89,7 +89,7 @@ public class Cus_OrderFragment extends Fragment {
         shipped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = "shipped";
+                status = "shipping";
                 packing.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
                 shipped.setTextColor(ContextCompat.getColor(requireContext(), R.color.my_green));
                 deliver.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
@@ -130,7 +130,7 @@ public class Cus_OrderFragment extends Fragment {
 
                         if ((DBstatus != null) &&
                                 ((status.equals("pending") && DBstatus.equals("pending")) ||
-                                        (status.equals("shipped") && DBstatus.equals("shipped")) ||
+                                        (status.equals("shipping") && DBstatus.equals("shipping")) ||
                                         (status.equals("delivered") && DBstatus.equals("delivered")) ||
                                         (status.equals("packing") && DBstatus.equals("packing")))) {
 

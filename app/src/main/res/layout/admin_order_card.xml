@@ -145,9 +145,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:background="#D8D8D8"
-        android:visibility="visible">
+        android:gravity="center">
 
         <Button
             android:id="@+id/acceptOrder"
