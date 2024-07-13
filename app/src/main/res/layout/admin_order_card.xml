@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="8dp"
+    android:background="#E8E8E8"
+    android:padding="8dp"
+    android:layout_margin="4dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ordImgad"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginEnd="9dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E8E8E8"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/ordiad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="order id"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/my_text"
+                android:layout_marginBottom="9dp"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name :"
+                    android:textStyle="italic"
+                    android:paddingEnd="3dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/ordnad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RS :"
+                    android:paddingEnd="3dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:textStyle="italic"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/ordpad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="price"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="qty :"
+                    android:paddingEnd="3dp"
+                    android:textSize="16dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/ordqad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="qty"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="status :"
+                    android:paddingEnd="3dp"
+                    android:textSize="16dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/ordsad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="status"
+                    android:textSize="16dp"
+                    android:textColor="@color/my_text"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:background="#D8D8D8"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/acceptOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accept Order"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/my_green"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/addToShipping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to shiping"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/my_green"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/finishOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/my_green"
+            android:text="Finish Order"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/adCanselOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#6B1E1E"
+            android:text="Delete Order"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>

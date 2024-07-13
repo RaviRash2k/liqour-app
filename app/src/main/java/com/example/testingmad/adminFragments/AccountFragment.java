@@ -3,6 +3,7 @@ package com.example.testingmad.adminFragments;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +34,10 @@ import com.example.testingmad.adminHome.AdminHome;
 import com.example.testingmad.adminHome.OthersOfHome.MainAdapter;
 import com.example.testingmad.adminHome.OthersOfHome.MainModel;
 import com.example.testingmad.cusHome.CustomerHome;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -196,12 +200,31 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //Alert of click cansel when status pending
 
-                editor.clear();
-                editor.apply();
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure logout ?");
 
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                startActivity(i);
+                builder.setPositiveButton("logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        editor.clear();
+                        editor.apply();
+
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
