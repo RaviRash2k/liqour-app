@@ -9,6 +9,7 @@
     app:cardElevation="2dp">
 
     <LinearLayout
+        android:id="@+id/moreinfo1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,12 +125,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-            <TextView
-                android:id="@+id/moreinfo1"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:drawableEnd="@drawable/info" />
 
     </LinearLayout>
 

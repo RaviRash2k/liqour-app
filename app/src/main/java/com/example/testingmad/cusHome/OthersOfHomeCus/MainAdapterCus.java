@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -161,9 +162,10 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemPrice, itemQty, moreinfo1;
+        TextView itemName, itemPrice, itemQty ;
         ImageView itemImage;
         Button addCart, orderCusHome;
+        LinearLayout moreinfo1;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);

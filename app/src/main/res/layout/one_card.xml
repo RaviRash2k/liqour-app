@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/moreinfoad"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,12 +102,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/moreinfoad"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginBottom="13dp"
-                android:drawableEnd="@drawable/info" />
             <TextView
                 android:id="@+id/editproduct"
                 android:layout_width="22dp"

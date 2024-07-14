@@ -266,14 +266,16 @@ public class AccountFragment extends Fragment {
                         String on1 = itemSnapshot.child("itemName").getValue(String.class);
                         String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
                         String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                        String on4 = itemSnapshot.child("User").getValue(String.class);
+                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
+                        String on5 = itemSnapshot.getKey();
 
                         MainModel mainModel = new MainModel();
 
                         mainModel.setItemName(on1);
                         mainModel.setItemPrice(on2);
                         mainModel.setItmImage(on3);
-                        mainModel.setSeller(on4);
+                        mainModel.setItemQty(on4);
+                        mainModel.setItemCode(on5);
 
                         list.add(mainModel);
                     }

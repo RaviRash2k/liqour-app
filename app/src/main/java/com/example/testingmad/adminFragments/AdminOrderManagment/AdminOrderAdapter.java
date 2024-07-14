@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -199,7 +200,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ma
         TextView itemName, itemPrice, itemQty, id, status;
         ImageView itemImage;
         Button acceptOrder, addToShipping, finishOrder, adCancelOrder;
-        ImageButton ordMoreInfo;
+        LinearLayout ordMoreInfo;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
@@ -62,39 +64,35 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         // Set item price
         holder.itemPrice.setText(model.getPrice());
 
-        //Set Available qty
+        // Set available quantity
         holder.itemQty.setText(model.getItemQty());
 
-        //edit product icon visibility
+        // Edit product icon visibility
         SharedPreferences sharedPreferences = context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
         String currentUser = sharedPreferences.getString("userEmail", "");
-        if(model.getSeller().equals(currentUser)){
+
+        if (Objects.equals(model.getSeller(), currentUser)) {
             holder.editproduct.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.editproduct.setVisibility(View.GONE);
         }
 
-        //Edit product
+        // Edit product
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String itemCodex = model.getItemCode();
-
                 Intent i = new Intent(context, EditProduct.class);
                 i.putExtra("ItemCode", itemCodex);
                 context.startActivity(i);
             }
         });
 
-
-        //More info
+        // More info
         holder.moreinfoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String itemCodex = model.getItemCode();
-
                 Intent i = new Intent(context, ItemsMoreInfo.class);
                 i.putExtra("ItemCode", itemCodex);
                 context.startActivity(i);
@@ -109,8 +107,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     public static class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemName, itemPrice, itemQty, moreinfoad, editproduct;
+        TextView itemName, itemPrice, itemQty, editproduct;
         ImageView itemImage;
+        LinearLayout moreinfoad;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
