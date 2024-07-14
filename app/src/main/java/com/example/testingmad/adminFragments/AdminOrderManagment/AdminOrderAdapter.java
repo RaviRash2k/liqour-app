@@ -2,6 +2,7 @@ package com.example.testingmad.adminFragments.AdminOrderManagment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testingmad.R;
 import com.example.testingmad.OrderManager.OrderModel;
+import com.example.testingmad.cusHome.ItemsMoreInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -67,6 +70,19 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ma
         holder.itemPrice.setText(model.getPrice());
         holder.itemQty.setText(model.getQuantity());
         holder.status.setText(model.getStatus());
+
+        //click more info of order
+        holder.ordMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String orderCodex = model.getOrderId();
+
+                Intent i = new Intent(context, OrderMoreInfoActivity.class);
+                i.putExtra("orderCode", orderCodex);
+                context.startActivity(i);
+            }
+        });
 
         String status = model.getStatus();
 
@@ -183,6 +199,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ma
         TextView itemName, itemPrice, itemQty, id, status;
         ImageView itemImage;
         Button acceptOrder, addToShipping, finishOrder, adCancelOrder;
+        ImageButton ordMoreInfo;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -197,6 +214,7 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Ma
             addToShipping = itemView.findViewById(R.id.addToShipping);
             finishOrder = itemView.findViewById(R.id.finishOrder);
             adCancelOrder = itemView.findViewById(R.id.adCanselOrder);
+            ordMoreInfo = itemView.findViewById(R.id.ordMoreInfo);
         }
     }
 

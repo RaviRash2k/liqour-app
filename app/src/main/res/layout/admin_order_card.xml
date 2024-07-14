@@ -138,6 +138,13 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/ordMoreInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/info"
+            android:backgroundTint="@color/my_bckground"/>
+
     </LinearLayout>
 
     <LinearLayout

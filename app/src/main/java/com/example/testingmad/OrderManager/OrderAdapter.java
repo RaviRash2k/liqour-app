@@ -186,13 +186,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
                 }
             });
 
-        } ////
+        }
         else if(s.equals("shipping")){
             holder.ordDelete.setVisibility(View.GONE);
             holder.fback.setVisibility(View.GONE);
 
         }
-        //
         else if (s.equals("delivered")) {
             holder.fback.setVisibility(View.VISIBLE);
             holder.ordDelete.setVisibility(View.GONE);

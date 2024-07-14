@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/my_bckground"
+    android:gravity="center"
+    tools:context=".adminFragments.AdminOrderManagment.OrderMoreInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/home_backg"
+        android:padding="25dp">
+        <TextView
+            android:id="@+id/ordIdMI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="order ID"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:textColor="@color/my_text"
+            android:layout_marginBottom="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Name  -"
+                android:textSize="16dp"
+                android:textColor="@color/my_text"
+                android:paddingEnd="8dp"/>
+            <TextView
+                android:id="@+id/ordnameMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord name"
+                android:textSize="16dp"
+                android:textColor="@color/my_text"
+                android:paddingEnd="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer ID  -"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+            <TextView
+                android:id="@+id/ordcusMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord cus"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Email  -"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+            <TextView
+                android:id="@+id/ordemailMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord email"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Mobile  -"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+            <TextView
+                android:id="@+id/ordmobiMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord mobile"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Address  -"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+            <TextView
+                android:id="@+id/ordadMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord address"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Qty  -"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+            <TextView
+                android:id="@+id/ordqtyMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ord qty"
+                android:textSize="16dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/my_text"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
