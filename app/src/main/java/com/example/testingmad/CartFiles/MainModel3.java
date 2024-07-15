@@ -30,15 +30,15 @@ public class MainModel3 {
     }
 
     //Getters
-    public String getName() {
+    public String getItemName() {
         return itemName;
     }
 
-    public String getPrice() {
+    public String getItemPrice() {
         return itemPrice;
     }
 
-    public String getImage() {
+    public String getItmImage() {
         return itmImage;
     }
 

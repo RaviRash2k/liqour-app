@@ -93,6 +93,7 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        //check already item added to cart
                         boolean itemExists = false;
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -108,27 +109,19 @@ public class MainAdapterCus extends RecyclerView.Adapter<MainAdapterCus.MainView
                             Toast.makeText(context, "Item Already added", Toast.LENGTH_SHORT).show();
 
                         } else {
+                            //If not already in cart, then add it
                             String k = DB.push().getKey();
                             if (k != null) {
                                 DB.child(k).child("customer").setValue(customer);
-                                DB.child(k).child("itemName").setValue(model.getName());
-                                DB.child(k).child("itemPrice").setValue(model.getPrice());
-                                DB.child(k).child("itemImage").setValue(model.getImage());
-                                DB.child(k).child("itemQuantity").setValue(model.getItemQty());
-                                DB.child(k).child("seller").setValue(model.getSeller());
                                 DB.child(k).child("ItemCode").setValue(model.getItemCode());
                             }
-
                             Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show();
-
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-
             }
         });
 

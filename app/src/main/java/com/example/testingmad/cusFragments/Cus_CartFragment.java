@@ -11,14 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.testingmad.CartFiles.MainModel3;
 import com.example.testingmad.R;
-import com.example.testingmad.RegisterActivity;
 import com.example.testingmad.CartFiles.MainAdapterOrd;
-import com.example.testingmad.CartFiles.MainModel3;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,11 +31,11 @@ public class Cus_CartFragment extends Fragment {
     MainAdapterOrd myAdapter;
     ArrayList<MainModel3> list;
     SharedPreferences sharedPreferences;
+    String itemCode;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cus__cart, container, false);
-
 
         recyclerView = rootView.findViewById(R.id.rview3);
         database = FirebaseDatabase.getInstance().getReference().child("Cart");
@@ -55,6 +52,7 @@ public class Cus_CartFragment extends Fragment {
 
         return rootView;
     }
+
     private void fetchDataFromDatabase() {
         database.addValueEventListener(new ValueEventListener() {
             @Override
@@ -64,29 +62,40 @@ public class Cus_CartFragment extends Fragment {
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String customer = itemSnapshot.child("customer").getValue(String.class);
 
-                    if (customer.equals(sharedPreferences.getString("userEmail", ""))){
-
-                        String on1 = itemSnapshot.child("itemName").getValue(String.class);
-                        String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
-                        String on3 = itemSnapshot.child("itemImage").getValue(String.class);
-                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
-                        String seller = itemSnapshot.child("User").getValue(String.class);
+                    if (customer.equals(sharedPreferences.getString("userEmail", ""))) {
                         String cartCode = itemSnapshot.getKey();
-                        String itemCode = itemSnapshot.child("ItemCode").getValue(String.class);
+                        itemCode = itemSnapshot.child("ItemCode").getValue(String.class);
 
+                        if (itemCode != null) {
+                            DatabaseReference dbForItems = FirebaseDatabase.getInstance().getReference().child("Items").child(itemCode);
+                            dbForItems.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot itemSnapshot) {
+                                    if (itemSnapshot.exists()) {
+                                        String on1 = itemSnapshot.child("itemName").getValue(String.class);
+                                        String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
+                                        String on3 = itemSnapshot.child("itemImage").getValue(String.class);
+                                        String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
 
-                        MainModel3 mainModel = new MainModel3();
-                        mainModel.setItemName(on1);
-                        mainModel.setItemPrice(on2);
-                        mainModel.setItmImage(on3);
-                        mainModel.setItemQty(on4);
-                        mainModel.setItemCode(itemCode);
-                        mainModel.setCartCode(cartCode);
+                                        MainModel3 mainModel = new MainModel3();
+                                        mainModel.setItemName(on1);
+                                        mainModel.setItemPrice(on2);
+                                        mainModel.setItmImage(on3);
+                                        mainModel.setItemQty(on4);
+                                        mainModel.setItemCode(itemCode);
+                                        mainModel.setCartCode(cartCode);
 
-                        list.add(mainModel);
+                                        list.add(mainModel);
+                                    }
+                                    myAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {}
+                            });
+                        }
                     }
                 }
-                myAdapter.notifyDataSetChanged();
             }
 
             @Override
