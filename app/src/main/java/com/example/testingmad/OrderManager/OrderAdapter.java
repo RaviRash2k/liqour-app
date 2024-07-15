@@ -122,6 +122,24 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
                                     }
                                 }
                             });
+                            //Order's quantity add again for available qty
+                            int canselQty = Integer.parseInt(model.getQuantity());
+
+                            DatabaseReference dbForItems = FirebaseDatabase.getInstance().getReference().child("Items").child(model.getItemID()).child("itemQuantity");
+                            dbForItems.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        int itemQuantity = Integer.parseInt(snapshot.getValue(String.class)) + canselQty;
+                                        String strItemQuantity = String.valueOf(itemQuantity);
+                                        dbForItems.setValue(strItemQuantity);
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    holder.itemQty.setText("Error");
+                                }
+                            });
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
