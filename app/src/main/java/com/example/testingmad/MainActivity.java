@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.testingmad.Forgot.Forgot;
 import com.example.testingmad.adminHome.AdminHome;
 import com.example.testingmad.cusHome.CustomerHome;
+import com.example.testingmad.superAdminHome.SuperAdminHomeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     break;
 
+                case "superAdmin":
+                    startActivity(new Intent(MainActivity.this, SuperAdminHomeActivity.class));
+                    finish();
+                    break;
+
                 default:
             }
         }
@@ -111,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
                                         } else if ("admin".equals(gettype)) {
                                             Toast.makeText(MainActivity.this, "Successfully logged into Admin account", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(MainActivity.this, AdminHome.class));
+                                            finish();
+
+                                        } else if ("superAdmin".equals(gettype)) {
+                                            Toast.makeText(MainActivity.this, "Successfully logged into Super Admin account", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(MainActivity.this, SuperAdminHomeActivity.class));
                                             finish();
 
                                         } else {

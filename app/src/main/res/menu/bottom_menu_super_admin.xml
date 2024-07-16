@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/sachome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/saprod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Products"
+        android:icon="@drawable/baseline_fiber_new_24"/>
+
+    <item
+        android:id="@+id/saorders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Orders"
+        android:icon="@drawable/baseline_local_shipping_24"/>
+
+    <item
+        android:id="@+id/sanoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Notifications"
+        android:icon="@drawable/baseline_notifications_24"/>
+
+    <item
+        android:id="@+id/sasout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Sign out"
+        android:icon="@drawable/baseline_logout_24"
+        />
+
+</menu>
