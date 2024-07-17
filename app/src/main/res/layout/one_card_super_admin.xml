@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:backgroundTint="#E8E8E8"
+    app:cardCornerRadius="3dp"
+    android:orientation="vertical"
+    android:background="@drawable/home_backg"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:id="@+id/moreinfoad"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp">
+
+        <ImageView
+            android:id="@+id/forimgsa"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:scaleType="centerCrop"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher_background"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/forNamesa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="@color/my_text"
+                android:paddingStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="19dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LKR : "
+                    android:textStyle="italic"
+                    android:textColor="@color/my_text"
+                    android:paddingStart="25dp"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/forPricesa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    android:paddingHorizontal="7dp"
+                    android:textColor="@color/my_text"
+                    android:textSize="18dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="available qty : "
+                    android:textStyle="italic"
+                    android:paddingStart="25dp"
+                    android:textColor="@color/my_text"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/forQtysa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Qty"
+                    android:textColor="@color/my_text"
+                    android:paddingHorizontal="7dp"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="8dp"/>
+
+            </LinearLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="seller : "-->
+<!--                    android:textStyle="italic"-->
+<!--                    android:paddingStart="25dp"-->
+<!--                    android:textColor="@color/my_text"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/forseller"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="id"-->
+<!--                    android:textColor="@color/my_text"-->
+<!--                    android:paddingHorizontal="3dp"-->
+<!--                    android:textSize="12dp"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
+
+<!--            </LinearLayout>-->
+
+        </LinearLayout>
+        
+        <ImageButton
+            android:id="@+id/deleteproductsa"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#8B1E1E"
+            android:src="@drawable/baseline_delete"/>
+
+    </LinearLayout>
+
+</LinearLayout>
