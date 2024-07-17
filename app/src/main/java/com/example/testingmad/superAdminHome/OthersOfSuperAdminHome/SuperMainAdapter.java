@@ -2,6 +2,7 @@ package com.example.testingmad.superAdminHome.OthersOfSuperAdminHome;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -14,13 +15,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testingmad.R;
 import com.example.testingmad.adminHome.EditProduct;
 import com.example.testingmad.cusHome.ItemsMoreInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,6 +87,45 @@ public class SuperMainAdapter extends RecyclerView.Adapter<SuperMainAdapter.Main
                 Intent i = new Intent(context, ItemsMoreInfo.class);
                 i.putExtra("ItemCode", itemCodex);
                 context.startActivity(i);
+            }
+        });
+
+        //delete button
+        holder.deleteproductsa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Alert for confirm delete
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure delete this product ?");
+
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Items").child(model.getItemCode());
+                        database.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(v.getContext(), "Product deleted successfully", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toast.makeText(v.getContext(), "Failed to delete product", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }

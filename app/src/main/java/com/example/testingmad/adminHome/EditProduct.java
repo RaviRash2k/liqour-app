@@ -67,7 +67,6 @@ public class EditProduct extends AppCompatActivity {
                     // Get itemCode from intent
                     Intent intent = getIntent();
                     String itemCode = intent.getStringExtra("ItemCode");
-                    System.out.println("codeeeee" + itemCode);
 
                     if (itemCode == null || itemCode.isEmpty()) {
                         Toast.makeText(EditProduct.this, "Item code is missing", Toast.LENGTH_SHORT).show();
