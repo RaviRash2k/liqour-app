@@ -60,10 +60,10 @@ public class SuperAdminHomeActivity extends AppCompatActivity {
                     loadFragment(new SuperAdminNewProductFragment(), false);
 
                 }else if(itemId == R.id.saorders){
-                    loadFragment(new SuperAdminNotificationFragment(), false);
+                    loadFragment(new SuperAdminOrdersFragment(), false);
 
                 }else if(itemId == R.id.sanoti){
-                    loadFragment(new SuperAdminOrdersFragment(), false);
+                    loadFragment(new SuperAdminNotificationFragment(), false);
 
                 }else if(itemId == R.id.sasout){
                     signOut();
