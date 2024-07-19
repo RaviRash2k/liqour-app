@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/my_bckground"
+    app:cardCornerRadius="3dp"
+    android:orientation="vertical"
+    android:background="@drawable/home_backg"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:id="@+id/moreinfoad"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp">
+
+        <ImageView
+            android:id="@+id/pendingImg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seller : "
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/my_text"
+                android:layout_marginVertical="5dp" />
+
+            <TextView
+                android:id="@+id/pendingSellerId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/my_text"
+                android:layout_marginVertical="5dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pendingName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/my_text"
+            android:layout_marginVertical="5dp" />
+
+        <TextView
+            android:id="@+id/pendingPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/my_text"
+            android:layout_marginVertical="5dp" />
+
+        <TextView
+            android:id="@+id/pendingDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/my_text"
+            android:layout_marginVertical="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="15dp">
+            <Button
+                android:id="@+id/pendingReject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reject"
+                android:textColor="@color/white"
+                android:backgroundTint="#7D2222"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp" />
+            <Button
+                android:id="@+id/pendingAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accept"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/my_green"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

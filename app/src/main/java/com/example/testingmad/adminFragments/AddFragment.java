@@ -76,8 +76,8 @@ public class AddFragment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        DB = FirebaseDatabase.getInstance().getReference().child("Items");
-        key = DB.child("Items").push().getKey();
+        DB = FirebaseDatabase.getInstance().getReference().child("Pending Items");
+        key = DB.push().getKey();
 
         PICK_IMAGE_REQUEST = 2;
 
