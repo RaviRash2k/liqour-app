@@ -1,66 +1,95 @@
 package com.example.testingmad.superAdminHome.superAdminFragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.testingmad.R;
+import com.example.testingmad.superAdminHome.OthersOfSuperAdminHome.SuperMainModel;
+import com.example.testingmad.superAdminHome.SuperAdminProductManage.PendingProductAdapter;
+import com.example.testingmad.superAdminHome.SuperAdminProductManage.PendingProductModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SuperAdminNewProductFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class SuperAdminNewProductFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SuperAdminNewProductFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SuperAdminNewProductFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SuperAdminNewProductFragment newInstance(String param1, String param2) {
-        SuperAdminNewProductFragment fragment = new SuperAdminNewProductFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    RecyclerView recyclerView;
+    DatabaseReference database;
+    PendingProductAdapter myAdapter;
+    ArrayList<PendingProductModel> list;
+    SharedPreferences sharedPreferences;
+    String itemCode;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_super_admin_new_product, container, false);
+
+        recyclerView = rootView.findViewById(R.id.pendingProducts);
+        database = FirebaseDatabase.getInstance().getReference().child("Pending Items");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        list = new ArrayList<>();
+        myAdapter = new PendingProductAdapter(getContext(), list);
+        recyclerView.setAdapter(myAdapter);
+
+        sharedPreferences = requireActivity().getSharedPreferences("CurrentUser", getContext().MODE_PRIVATE);
+
+        fetchDataFromDatabase();
+
+        return rootView;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_super_admin_new_product, container, false);
+    private void fetchDataFromDatabase() {
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                list.clear();
+
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    String on1 = itemSnapshot.child("itemName").getValue(String.class);
+                    String on2 = itemSnapshot.child("itemPrice").getValue(String.class);
+                    String on3 = itemSnapshot.child("itemImage").getValue(String.class);
+                    String on4 = itemSnapshot.child("itemQuantity").getValue(String.class);
+                    String on5 = itemSnapshot.child("itemDescription").getValue(String.class);
+                    String on6 = itemSnapshot.child("User").getValue(String.class);
+                    String on7 = itemSnapshot.child("itemType").getValue(String.class);
+                    String itemCode = itemSnapshot.getKey();
+
+                    PendingProductModel mainModel = new PendingProductModel();
+                    mainModel.setName(on1 != null ? on1 : "Unknown Name");
+                    mainModel.setPrice(on2 != null ? on2 : "Unknown Price");
+                    mainModel.setImage(on3 != null ? on3 : "Unknown Image");
+                    mainModel.setQty(on4 != null ? on4 : "Unknown Quantity");
+                    mainModel.setDescription(on5 != null ? on5 : "Unknown Description");
+                    mainModel.setSeller(on6 != null ? on6 : "Unknown Seller");
+                    mainModel.setType(on7 != null ? on7 : "Unknown Type");
+                    mainModel.setItemId(itemCode);
+
+                    list.add(mainModel);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("error");
+            }
+        });
     }
+
 }

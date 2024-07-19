@@ -164,7 +164,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MainViewHold
                     DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Orders").child(model.getOrderId());
 
                     //Alert of click cansel when status pending
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setMessage("Are you sure delete order ?");
 

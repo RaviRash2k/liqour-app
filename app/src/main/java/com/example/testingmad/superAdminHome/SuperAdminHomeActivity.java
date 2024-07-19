@@ -1,5 +1,9 @@
 package com.example.testingmad.superAdminHome;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -14,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.testingmad.MainActivity;
 import com.example.testingmad.R;
 import com.example.testingmad.cusFragments.Cus_CartFragment;
 import com.example.testingmad.cusFragments.Cus_Fragment;
@@ -60,6 +65,9 @@ public class SuperAdminHomeActivity extends AppCompatActivity {
                 }else if(itemId == R.id.sanoti){
                     loadFragment(new SuperAdminOrdersFragment(), false);
 
+                }else if(itemId == R.id.sasout){
+                    signOut();
+
                 }else{
                     loadFragment(new SuperAdminHomeFragment(), false);
                 }
@@ -82,5 +90,36 @@ public class SuperAdminHomeActivity extends AppCompatActivity {
         }
 
         fragmentTransaction.commit();
+    }
+
+    public void signOut(){
+
+        //Alert of click cansel when status pending
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(SuperAdminHomeActivity.this);
+        builder.setMessage("Do you want to logout ?");
+
+        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                SharedPreferences sharedPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+
+                Intent i = new Intent(SuperAdminHomeActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
