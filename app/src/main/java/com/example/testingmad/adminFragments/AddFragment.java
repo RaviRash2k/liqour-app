@@ -48,12 +48,10 @@ public class AddFragment extends Fragment {
     Uri uri;
     int PICK_IMAGE_REQUEST;
 
-
     String name;
     String price;
     String desc;
     String qty;
-
 
     @Nullable
     @Override
@@ -97,18 +95,30 @@ public class AddFragment extends Fragment {
             }
         });
 
+        //click submit button
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 name = itemName.getText().toString();
                 price = itemPrice.getText().toString();
                 desc = itemDesc.getText().toString();
                 qty = itemQty.getText().toString();
 
-                Integer.parseInt(qty);
+                // Check if quantity is a valid number
+                if (qty.isEmpty()) {
+                    Toast.makeText(getContext(), "Quantity is required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                //check food or liquor
+                int quantity;
+                try {
+                    quantity = Integer.parseInt(qty);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Invalid quantity", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check food or liquor
                 food = rootView.findViewById(R.id.checkfood);
                 liquor = rootView.findViewById(R.id.checkliquor);
 
@@ -118,15 +128,13 @@ public class AddFragment extends Fragment {
                     type = "food";
                 } else if (liquor.isChecked()) {
                     type = "liquor";
-                }else{
+                } else {
                     type = "invalid";
                 }
 
-                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || qty.isEmpty() || type.equals("invalid")){
-
+                if(name.isEmpty() || price.isEmpty() || desc.isEmpty() || type.equals("invalid")) {
                     Toast.makeText(getContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
-                }else{
-
+                } else {
                     if (uri != null) {
                         StorageReference file = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
                         file.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -135,13 +143,12 @@ public class AddFragment extends Fragment {
                                 file.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-
                                         String imageUrl = uri.toString();
                                         DB.child(key).child("itemImage").setValue(imageUrl);
                                         DB.child(key).child("itemName").setValue(name);
                                         DB.child(key).child("itemPrice").setValue(price);
                                         DB.child(key).child("itemDescription").setValue(desc);
-                                        DB.child(key).child("itemQuantity").setValue(qty);
+                                        DB.child(key).child("itemQuantity").setValue(quantity);
                                         DB.child(key).child("itemType").setValue(type);
                                         DB.child(key).child("User").setValue(user);
 
@@ -154,9 +161,7 @@ public class AddFragment extends Fragment {
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-//                                Log.e(TAG, "Error uploading image", e);
-                            }
+                            public void onFailure(@NonNull Exception e) { }
                         });
                     } else {
                         Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
