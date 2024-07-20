@@ -115,7 +115,6 @@ public class Cus_OrderFragment extends Fragment {
     }
 
     private void fetchDataFromDatabase() {
-
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -153,12 +152,21 @@ public class Cus_OrderFragment extends Fragment {
                             mainModel.setItemID(itemId);
 
                             list.add(mainModel);
-                        }else{ }
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();
-            }
 
+                // Show "No items" message if the list is empty
+                TextView noItemsMessage = getView().findViewById(R.id.noItemsMessage);
+                if (list.isEmpty()) {
+                    noItemsMessage.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                } else {
+                    noItemsMessage.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

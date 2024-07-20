@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class AdOrdersFragment extends Fragment {
 
     DatabaseReference database;
-    TextView pending, shipped, deliver, packing, canceled;
+    TextView pending, shipped, deliver, packing, canceled, noItemsMessage;
     RecyclerView recyclerView;
     String status = "pending";
     ArrayList<AdminOrderModel> list;
@@ -50,6 +50,7 @@ public class AdOrdersFragment extends Fragment {
         deliver = rootView.findViewById(R.id.deliverad);
         packing = rootView.findViewById(R.id.packingad);
         canceled = rootView.findViewById(R.id.canceled);
+        noItemsMessage = rootView.findViewById(R.id.no_items_message);
 
         database = FirebaseDatabase.getInstance().getReference().child("Orders");
         sharedPreferences = requireActivity().getSharedPreferences("CurrentUser", getContext().MODE_PRIVATE);
@@ -172,9 +173,18 @@ public class AdOrdersFragment extends Fragment {
                             mainModel.setItemID(itemId);
 
                             list.add(mainModel);
-                        }else{ }
+                        }
                     }
                 }
+
+                if (list.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    noItemsMessage.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    noItemsMessage.setVisibility(View.GONE);
+                }
+
                 adapter.notifyDataSetChanged();
             }
 

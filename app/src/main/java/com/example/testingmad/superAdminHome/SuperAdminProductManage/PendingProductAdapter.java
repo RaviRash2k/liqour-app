@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,15 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
 
     @Override
     public void onBindViewHolder(@NonNull PendingProductAdapter.MainViewHolder holder, int position) {
+        if (list == null) {
+            Log.e("PendingProductAdapter", "List is null");
+            return;
+        }
+        if (position < 0 || position >= list.size()) {
+            Log.e("PendingProductAdapter", "Invalid position: " + position);
+            return;
+        }
+
         PendingProductModel model = list.get(position);
 
         // Set item name
@@ -58,10 +68,10 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
         // Set item price
         holder.itemPrice.setText(model.getPrice());
 
-        //set item description
+        // Set item description
         holder.itemDesc.setText(model.getDescription());
 
-        //set item seller id
+        // Set item seller id
         holder.seller.setText(model.getSeller());
 
         // Load image
@@ -71,26 +81,23 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
             holder.itemImage.setImageResource(R.drawable.ic_launcher_background);
         }
 
-        //click reject button
+        // Click reject button
         holder.pendingReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Alert for confirm reject
+                // Alert for confirm reject
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("are you sure reject this product ?");
+                builder.setMessage("Are you sure reject this product?");
 
-                builder.setPositiveButton("yes", new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Pending Items").child(model.getItemId());
                         database.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(v.getContext(), "Product rejected successfully", Toast.LENGTH_SHORT).show();
-
                                 } else {
                                     Toast.makeText(v.getContext(), "Failed to reject product", Toast.LENGTH_SHORT).show();
                                 }
@@ -98,7 +105,7 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
                         });
                     }
                 });
-                builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -110,19 +117,18 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
             }
         });
 
-        //click accept button
+        // Click accept button
         holder.pendingAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Alert for confirm reject
+                // Alert for confirm accept
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("are you sure accept this product ?");
+                builder.setMessage("Are you sure accept this product?");
 
-                builder.setPositiveButton("yes", new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        //add to Item table when accept
+                        // Add to Item table when accepted
                         DatabaseReference database2 = FirebaseDatabase.getInstance().getReference().child("Items");
 
                         String key = database2.push().getKey();
@@ -135,7 +141,7 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
                         database2.child(key).child("itemQuantity").setValue(model.getQty());
                         database2.child(key).child("itemType").setValue(model.getType());
 
-                        //remove pending table when accept it
+                        // Remove from Pending Items table when accepted
                         DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Pending Items").child(model.getItemId());
                         database.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -144,7 +150,7 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
                         });
                     }
                 });
-                builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -155,8 +161,8 @@ public class PendingProductAdapter extends RecyclerView.Adapter<PendingProductAd
                 alertDialog.show();
             }
         });
-
     }
+
 
     @Override
     public int getItemCount() {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.testingmad.R;
 import com.example.testingmad.superAdminHome.OthersOfSuperAdminHome.SuperMainModel;
@@ -32,12 +33,14 @@ public class SuperAdminNewProductFragment extends Fragment {
     ArrayList<PendingProductModel> list;
     SharedPreferences sharedPreferences;
     String itemCode;
+    TextView noItemsTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_super_admin_new_product, container, false);
 
         recyclerView = rootView.findViewById(R.id.pendingProducts);
+        noItemsTextView = rootView.findViewById(R.id.noItemsTextView);
         database = FirebaseDatabase.getInstance().getReference().child("Pending Items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -57,7 +60,6 @@ public class SuperAdminNewProductFragment extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 list.clear();
 
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
@@ -82,7 +84,16 @@ public class SuperAdminNewProductFragment extends Fragment {
 
                     list.add(mainModel);
                 }
+
                 myAdapter.notifyDataSetChanged();
+
+                if (list.isEmpty()) {
+                    noItemsTextView.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                } else {
+                    noItemsTextView.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -91,5 +102,4 @@ public class SuperAdminNewProductFragment extends Fragment {
             }
         });
     }
-
 }

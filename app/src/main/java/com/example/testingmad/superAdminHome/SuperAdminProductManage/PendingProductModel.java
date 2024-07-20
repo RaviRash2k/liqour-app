@@ -1,9 +1,9 @@
 package com.example.testingmad.superAdminHome.SuperAdminProductManage;
 
 public class PendingProductModel {
-
     String name, price, qty, description, seller, image, type, itemId;
 
+    // Getters and Setters
     public String getName() {
         return name;
     }
