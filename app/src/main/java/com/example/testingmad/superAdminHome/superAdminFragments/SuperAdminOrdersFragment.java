@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class SuperAdminOrdersFragment extends Fragment {
 
     DatabaseReference database;
-    TextView pending, shipped, deliver, packing;
+    TextView pending, shipped, deliver, packing, noItemsText;
     RecyclerView recyclerView;
     String status = "pending";
     ArrayList<superAdminOrderModel> list;
@@ -47,6 +47,7 @@ public class SuperAdminOrdersFragment extends Fragment {
         shipped = rootView.findViewById(R.id.shiped);
         deliver = rootView.findViewById(R.id.deliver);
         packing = rootView.findViewById(R.id.packing);
+        noItemsText = rootView.findViewById(R.id.noItemsText);
 
         database = FirebaseDatabase.getInstance().getReference().child("Orders");
 
@@ -150,6 +151,15 @@ public class SuperAdminOrdersFragment extends Fragment {
                         }else{ }
                 }
                 adapter.notifyDataSetChanged();
+
+                if (list.isEmpty()) {
+                    noItemsText.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+
+                } else {
+                    noItemsText.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

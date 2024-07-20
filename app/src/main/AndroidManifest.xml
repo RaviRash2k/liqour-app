@@ -16,6 +16,9 @@
         android:theme="@style/Theme.TestingMAD"
         tools:targetApi="31">
         <activity
+            android:name=".Search_Bar.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".superAdminHome.SuperAdminHomeActivity"
             android:exported="false" />
         <activity
