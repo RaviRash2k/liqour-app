@@ -15,21 +15,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <LinearLayout
             android:layout_weight="1"
-            android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Search items"
-            android:background="@drawable/search_bacckg"
-            android:queryBackground="@android:color/transparent"
+            android:orientation="horizontal"
             android:layout_marginTop="30dp"
             android:textColor="@color/black"
             android:layout_marginBottom="1dp"
+            android:padding="2dp"
             android:layout_marginHorizontal="10dp"
-            android:inputType="text"
-            android:textSize="16sp"
-            android:paddingStart="35dp"/>
+            android:background="@drawable/search_bacckg">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="Search items"
+                android:background="@null"
+                android:queryBackground="@android:color/transparent"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:textColorHint="#4B4B4B"
+                android:textColor="@color/my_text"
+                android:paddingStart="25dp"/>
+
+            <ImageButton
+                android:id="@+id/searchImg"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="17dp"
+                android:src="@drawable/_15695_magnifying_glass_zoom_find_search_icon"
+                android:background="#00FBFBFB" />
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -108,18 +129,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
-
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E6E6E6"
-        >
+        android:background="#E6E6E6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,7 +153,6 @@
                 android:orientation="vertical"
                 android:background="@drawable/home_backg"
                 android:paddingHorizontal="10dp">
-<!--                android:background="@drawable/white_bg_top_corner">-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rview1"

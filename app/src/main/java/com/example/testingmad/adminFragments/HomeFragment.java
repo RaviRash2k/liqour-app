@@ -1,10 +1,9 @@
 package com.example.testingmad.adminFragments;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
+import com.example.testingmad.Search_Bar.SearchActivity;
 import com.example.testingmad.adminHome.OthersOfHome.MainAdapter;
 import com.example.testingmad.adminHome.OthersOfHome.MainModel;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +34,8 @@ public class HomeFragment extends Fragment {
     MainAdapter myAdapter;
     ArrayList<MainModel> list;
     TextView foodSelect, liqorSelect, food, liquor;
+    ImageButton searchImg;
+    EditText search;
     String liqOfood;
 
 
@@ -53,6 +53,11 @@ public class HomeFragment extends Fragment {
         myAdapter = new MainAdapter(getContext(),list);
         recyclerView.setAdapter(myAdapter);
 
+        //search image
+        searchImg = rootView.findViewById(R.id.searchImg);
+        search = rootView.findViewById(R.id.search);
+
+        //liqour or food
         foodSelect = rootView.findViewById(R.id.foodSelect);
         liqorSelect = rootView.findViewById(R.id.liqorSelect);
         food = rootView.findViewById(R.id.x);
@@ -62,6 +67,25 @@ public class HomeFragment extends Fragment {
 
         //Default home
         home();
+
+        //click search button
+        searchImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String searchResult = search.getText().toString();
+
+                if(!searchResult.isEmpty()){
+
+                    Intent i = new Intent(getContext(), SearchActivity.class);
+                    i.putExtra("Search", searchResult);
+                    getContext().startActivity(i);
+
+                    search.setText("");
+
+                }else{ }
+            }
+        });
 
         //If click liquor
         liquor.setOnClickListener(new View.OnClickListener() {

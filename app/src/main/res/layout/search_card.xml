@@ -11,14 +11,14 @@
     app:cardElevation="2dp">
 
     <LinearLayout
-        android:id="@+id/moreinfoad"
+        android:id="@+id/moreinfoae"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="13dp">
 
         <ImageView
-            android:id="@+id/forimgsa"
+            android:id="@+id/forimgse"
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:scaleType="centerCrop"
@@ -33,7 +33,7 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/forNamesa"
+                android:id="@+id/forNamese"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
@@ -61,7 +61,7 @@
                     android:textSize="15dp"/>
 
                 <TextView
-                    android:id="@+id/forPricesa"
+                    android:id="@+id/forPricese"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price"
@@ -87,7 +87,7 @@
                     android:layout_marginBottom="8dp"/>
 
                 <TextView
-                    android:id="@+id/forQtysa"
+                    android:id="@+id/forQtyse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Qty"
@@ -98,41 +98,7 @@
 
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="seller : "-->
-<!--                    android:textStyle="italic"-->
-<!--                    android:paddingStart="25dp"-->
-<!--                    android:textColor="@color/my_text"-->
-<!--                    android:textSize="14dp"-->
-<!--                    android:layout_marginBottom="8dp"/>-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/forseller"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="id"-->
-<!--                    android:textColor="@color/my_text"-->
-<!--                    android:paddingHorizontal="3dp"-->
-<!--                    android:textSize="12dp"-->
-<!--                    android:layout_marginBottom="8dp"/>-->
-
-<!--            </LinearLayout>-->
-
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/deleteproductsa"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="#8B1E1E"
-            android:src="@drawable/baseline_delete"/>
 
     </LinearLayout>
 

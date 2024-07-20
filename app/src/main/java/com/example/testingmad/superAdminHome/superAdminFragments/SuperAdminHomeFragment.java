@@ -1,5 +1,6 @@
 package com.example.testingmad.superAdminHome.superAdminFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
+import com.example.testingmad.Search_Bar.SearchActivity;
 import com.example.testingmad.superAdminHome.OthersOfSuperAdminHome.SuperMainAdapter;
 import com.example.testingmad.superAdminHome.OthersOfSuperAdminHome.SuperMainModel;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +33,8 @@ public class SuperAdminHomeFragment extends Fragment {
     DatabaseReference database;
     SuperMainAdapter myAdapter;
     ArrayList<SuperMainModel> list;
+    ImageButton searchImg;
+    EditText search;
     TextView foodSelect, liqorSelect, food, liquor;
     String liqOfood;
 
@@ -47,6 +53,10 @@ public class SuperAdminHomeFragment extends Fragment {
         myAdapter = new SuperMainAdapter(getContext(),list);
         recyclerView.setAdapter(myAdapter);
 
+        //search image
+        searchImg = rootView.findViewById(R.id.searchImg);
+        search = rootView.findViewById(R.id.search);
+
         liqorSelect = rootView.findViewById(R.id.foodSelectsa);
         foodSelect = rootView.findViewById(R.id.liqorSelectsa);
         liquor = rootView.findViewById(R.id.xsa);
@@ -56,6 +66,25 @@ public class SuperAdminHomeFragment extends Fragment {
 
         //Default home
         home();
+
+        //click search button
+        searchImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String searchResult = search.getText().toString();
+
+                if(!searchResult.isEmpty()){
+
+                    Intent i = new Intent(getContext(), SearchActivity.class);
+                    i.putExtra("Search", searchResult);
+                    getContext().startActivity(i);
+
+                    search.setText("");
+
+                }else{ }
+            }
+        });
 
         //If click liquor
         food.setOnClickListener(new View.OnClickListener() {

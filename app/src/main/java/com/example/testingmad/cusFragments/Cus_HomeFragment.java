@@ -1,5 +1,6 @@
 package com.example.testingmad.cusFragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -12,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.testingmad.R;
 import com.example.testingmad.RegisterActivity;
+import com.example.testingmad.Search_Bar.SearchActivity;
 import com.example.testingmad.adminHome.OthersOfHome.MainModel;
 import com.example.testingmad.cusHome.OthersOfHomeCus.MainAdapterCus;
 import com.example.testingmad.cusHome.OthersOfHomeCus.MainModel2;
@@ -34,6 +38,8 @@ public class Cus_HomeFragment extends Fragment {
     DatabaseReference database;
     MainAdapterCus myAdapter;
     ArrayList<MainModel2> list;
+    ImageButton searchImg;
+    EditText search;
     TextView foodSelect, liqorSelect, x, y;
     String liqOfood = "food";
 
@@ -50,6 +56,10 @@ public class Cus_HomeFragment extends Fragment {
         myAdapter = new MainAdapterCus(getContext(), list);
         recyclerView.setAdapter(myAdapter);
 
+        //search image
+        searchImg = rootView.findViewById(R.id.searchImg);
+        search = rootView.findViewById(R.id.search);
+
         foodSelect = rootView.findViewById(R.id.foodSelect);
         liqorSelect = rootView.findViewById(R.id.liqorSelect);
         x = rootView.findViewById(R.id.x);
@@ -57,6 +67,25 @@ public class Cus_HomeFragment extends Fragment {
 
         foodSelect.setVisibility(View.VISIBLE);
         liqorSelect.setVisibility(View.GONE);
+
+        //click search button
+        searchImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String searchResult = search.getText().toString();
+
+                if(!searchResult.isEmpty()){
+
+                    Intent i = new Intent(getContext(), SearchActivity.class);
+                    i.putExtra("Search", searchResult);
+                    getContext().startActivity(i);
+
+                    search.setText("");
+
+                }else{ }
+            }
+        });
 
         fetchDataFromDatabase();
 
