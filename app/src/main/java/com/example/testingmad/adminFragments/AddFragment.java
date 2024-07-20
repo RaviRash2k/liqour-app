@@ -35,7 +35,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
 public class AddFragment extends Fragment {
 
     EditText itemName, itemPrice, itemDesc, itemQty;
@@ -148,7 +147,7 @@ public class AddFragment extends Fragment {
                                         DB.child(key).child("itemName").setValue(name);
                                         DB.child(key).child("itemPrice").setValue(price);
                                         DB.child(key).child("itemDescription").setValue(desc);
-                                        DB.child(key).child("itemQuantity").setValue(quantity);
+                                        DB.child(key).child("itemQuantity").setValue(qty);
                                         DB.child(key).child("itemType").setValue(type);
                                         DB.child(key).child("User").setValue(user);
 
@@ -169,7 +168,6 @@ public class AddFragment extends Fragment {
                 }
             }
         });
-
         return rootView;
     }
 
@@ -194,6 +192,7 @@ public class AddFragment extends Fragment {
                 img.setImageURI(uri);
 
             } else {
+
                 Toast.makeText(getContext(), "Error: Image not selected", Toast.LENGTH_SHORT).show();
             }
         }
