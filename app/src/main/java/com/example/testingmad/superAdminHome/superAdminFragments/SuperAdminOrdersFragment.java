@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
@@ -152,12 +153,16 @@ public class SuperAdminOrdersFragment extends Fragment {
                 }
                 adapter.notifyDataSetChanged();
 
+                ImageView noItemImage = getView().findViewById(R.id.noItemImage);
+
                 if (list.isEmpty()) {
                     noItemsText.setVisibility(View.VISIBLE);
+                    noItemImage.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
 
                 } else {
                     noItemsText.setVisibility(View.GONE);
+                    noItemImage.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 }
             }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
@@ -35,7 +36,7 @@ public class SuperAdminHomeFragment extends Fragment {
     ArrayList<SuperMainModel> list;
     ImageButton searchImg;
     EditText search;
-    TextView foodSelect, liqorSelect, food, liquor;
+    ImageView foodSelect, liqorSelect, food, liquor;
     String liqOfood;
 
 

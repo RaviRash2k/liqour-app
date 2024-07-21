@@ -3,18 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="12dp"
     android:background="@color/my_bckground"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="1dp"
+        android:padding="2dp"
+        android:background="@drawable/search_bacckg">
+
+        <EditText
+            android:id="@+id/searchh"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="Search items"
+            android:background="@null"
+            android:queryBackground="@android:color/transparent"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:textColorHint="#4B4B4B"
+            android:textColor="@color/my_text"
+            android:paddingStart="25dp"/>
+
+        <ImageButton
+            android:id="@+id/searchImgg"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="17dp"
+            android:src="@drawable/_15695_magnifying_glass_zoom_find_search_icon"
+            android:background="#00FBFBFB" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:paddingTop="2dp"
         android:paddingBottom="5dp"
         android:orientation="vertical"
         android:background="@drawable/home_backg"
         android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/noItemImage"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:src="@drawable/notsearchs"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/no_items_text"

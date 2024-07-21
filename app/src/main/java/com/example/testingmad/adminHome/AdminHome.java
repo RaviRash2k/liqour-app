@@ -51,10 +51,12 @@ public class AdminHome extends AppCompatActivity {
                 }else if(itemId == R.id.nadd){
                     loadFragment(new AddFragment(), false);
 
-                }else if(itemId == R.id.nalarts){
-                    loadFragment(new NotificationFragment(), false);
-
-                }else if(itemId == R.id.nprofile){
+                }
+//                else if(itemId == R.id.nalarts){
+//                    loadFragment(new NotificationFragment(), false);
+//
+//                }
+                else if(itemId == R.id.nprofile){
                     loadFragment(new AccountFragment(), false);
 
                 }else{

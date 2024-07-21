@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
@@ -33,7 +34,7 @@ public class HomeFragment extends Fragment {
     DatabaseReference database;
     MainAdapter myAdapter;
     ArrayList<MainModel> list;
-    TextView foodSelect, liqorSelect, food, liquor;
+    ImageView foodSelect, liqorSelect, food, liquor;
     ImageButton searchImg;
     EditText search;
     String liqOfood;

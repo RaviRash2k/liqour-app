@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
@@ -177,12 +178,16 @@ public class AdOrdersFragment extends Fragment {
                     }
                 }
 
+                ImageView noItemImage = getView().findViewById(R.id.noItemImage);
+
                 if (list.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
                     noItemsMessage.setVisibility(View.VISIBLE);
+                    noItemImage.setVisibility(View.VISIBLE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     noItemsMessage.setVisibility(View.GONE);
+                    noItemImage.setVisibility(View.GONE);
                 }
 
                 adapter.notifyDataSetChanged();

@@ -22,12 +22,12 @@
         android:title="Orders"
         android:icon="@drawable/baseline_local_shipping_24"/>
 
-    <item
-        android:id="@+id/sanoti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="Notifications"
-        android:icon="@drawable/baseline_notifications_24"/>
+<!--    <item-->
+<!--        android:id="@+id/sanoti"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:title="Notifications"-->
+<!--        android:icon="@drawable/baseline_notifications_24"/>-->
 
     <item
         android:id="@+id/sasout"

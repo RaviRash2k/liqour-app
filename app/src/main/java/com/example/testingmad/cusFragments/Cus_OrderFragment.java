@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.OrderManager.OrderAdapter;
@@ -159,11 +160,15 @@ public class Cus_OrderFragment extends Fragment {
 
                 // Show "No items" message if the list is empty
                 TextView noItemsMessage = getView().findViewById(R.id.noItemsMessage);
+                ImageView noItemImage = getView().findViewById(R.id.noItemImage);
+
                 if (list.isEmpty()) {
                     noItemsMessage.setVisibility(View.VISIBLE);
+                    noItemImage.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 } else {
                     noItemsMessage.setVisibility(View.GONE);
+                    noItemImage.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 }
             }

@@ -70,21 +70,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/x"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="28dp"
                 android:gravity="center"
-                android:text="Foods"
+                android:src="@drawable/food_black"
+                android:padding="8dp"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/y"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/y"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -92,14 +93,15 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="15dp"
                 android:gravity="center"
-                android:text="Drinks"
+                android:src="@drawable/wine"
+                android:padding="8dp"
                 android:textAlignment="center"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/foodSelect"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -107,13 +109,14 @@
                 android:layout_marginTop="28dp"
                 android:background="@drawable/food_back"
                 android:gravity="center"
-                android:text="Foods"
+                android:src="@drawable/food_white"
+                android:padding="8dp"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/liqorSelect"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -122,7 +125,8 @@
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/food_back"
                 android:gravity="center"
-                android:text="Drinks"
+                android:src="@drawable/wine_white"
+                android:padding="8dp"
                 android:textAlignment="center"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
