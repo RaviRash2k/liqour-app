@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class Cus_HomeFragment extends Fragment {
     ArrayList<MainModel2> list;
     ImageButton searchImg;
     EditText search;
-    TextView foodSelect, liqorSelect, x, y;
+    ImageView foodSelect, liqorSelect, x, y;
     String liqOfood = "food";
 
     @Override

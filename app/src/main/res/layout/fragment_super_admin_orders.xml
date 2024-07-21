@@ -87,12 +87,20 @@
                     android:background="@drawable/home_backg"
                     android:paddingHorizontal="10dp">
 
+                    <ImageView
+                        android:id="@+id/noItemImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        android:src="@drawable/order"
+                        android:layout_gravity="center"
+                        android:visibility="gone"/>
+
                     <TextView
                         android:id="@+id/noItemsText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="No items"
+                        android:text="No orders"
                         android:textSize="18sp"
                         android:visibility="gone"
                         android:textColor="@color/my_text"

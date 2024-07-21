@@ -62,10 +62,12 @@ public class SuperAdminHomeActivity extends AppCompatActivity {
                 }else if(itemId == R.id.saorders){
                     loadFragment(new SuperAdminOrdersFragment(), false);
 
-                }else if(itemId == R.id.sanoti){
-                    loadFragment(new SuperAdminNotificationFragment(), false);
-
-                }else if(itemId == R.id.sasout){
+                }
+//                else if(itemId == R.id.sanoti){
+//                    loadFragment(new SuperAdminNotificationFragment(), false);
+//
+//                }
+                else if(itemId == R.id.sasout){
                     signOut();
 
                 }else{

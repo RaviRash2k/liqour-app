@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.testingmad.CartFiles.MainModel3;
@@ -32,12 +34,16 @@ public class Cus_CartFragment extends Fragment {
     ArrayList<MainModel3> list;
     SharedPreferences sharedPreferences;
     String itemCode;
+    ImageView noItemImage;
+    TextView noItemsText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cus__cart, container, false);
 
         recyclerView = rootView.findViewById(R.id.rview3);
+        noItemImage = rootView.findViewById(R.id.noItemImage);
+        noItemsText = rootView.findViewById(R.id.noItemsText);
         database = FirebaseDatabase.getInstance().getReference().child("Cart");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -88,6 +94,7 @@ public class Cus_CartFragment extends Fragment {
                                         list.add(mainModel);
                                     }
                                     myAdapter.notifyDataSetChanged();
+                                    toggleEmptyState();
                                 }
 
                                 @Override
@@ -96,6 +103,7 @@ public class Cus_CartFragment extends Fragment {
                         }
                     }
                 }
+                toggleEmptyState();
             }
 
             @Override
@@ -103,5 +111,17 @@ public class Cus_CartFragment extends Fragment {
 
             }
         });
+    }
+
+    private void toggleEmptyState() {
+        if (list.isEmpty()) {
+            noItemImage.setVisibility(View.VISIBLE);
+            noItemsText.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            noItemImage.setVisibility(View.GONE);
+            noItemsText.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }

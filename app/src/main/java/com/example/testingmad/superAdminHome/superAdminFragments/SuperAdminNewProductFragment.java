@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testingmad.R;
@@ -87,11 +88,15 @@ public class SuperAdminNewProductFragment extends Fragment {
 
                 myAdapter.notifyDataSetChanged();
 
+                ImageView noItemImage = getView().findViewById(R.id.noItemImage);
+
                 if (list.isEmpty()) {
                     noItemsTextView.setVisibility(View.VISIBLE);
+                    noItemImage.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 } else {
                     noItemsTextView.setVisibility(View.GONE);
+                    noItemImage.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 }
             }
